@@ -22,7 +22,7 @@
         render() {
             return (
                     <li className="contact">
-                        <img className="contact-image" src={this.props.image} width="60px" height="60px"/>
+                        <img className="contact-image" src={this.props.imagePath} width="60px" height="60px"/>
                         <div className="contact-info">
                             <div className="contact-name"> {this.props.name} {this.props.surname} </div>
                             <div className="contact-number"> {this.props.phoneNumbers} </div>
@@ -61,14 +61,12 @@
                                 this.state.contacts.map(function (el) {
                                     return <Contact
                                             key={el.id}
+                                            imagePath={el.imagePath}
                                             name={el.name}
                                             surname={el.surname}
                                             phoneNumbers={el.phoneNumbers}
-                                            <%--home={el.phoneNumbers.home}--%>
-                                            <%--work={el.phoneNumbers.work}--%>
                                             dob={el.dob}
                                             address={el.address}
-                                            image={el.image}
                                     />;
                                 })
                             }

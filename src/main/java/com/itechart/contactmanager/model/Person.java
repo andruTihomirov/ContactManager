@@ -14,6 +14,9 @@ public class Person {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name="imagePath")
+    private String imagePath;
+
     @Column(name="name")
     private String name;
 
@@ -50,6 +53,14 @@ public class Person {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
     }
 
     public String getName() {
