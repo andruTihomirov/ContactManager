@@ -27,6 +27,8 @@
                             <div className="contact-name"> {this.props.name} {this.props.surname} </div>
                             <div className="contact-number"> {this.props.phoneNumbers} </div>
                             <div>address: {this.props.address}</div>
+                            <div><a href={"http://localhost:8080/ContactManager/edit/" + this.props.reactKey}>edit</a></div>
+                            <div><a href="#">delete</a></div>
                         </div>
                     </li>
             );
@@ -43,7 +45,7 @@
         };
 
         componentDidMount() {
-            fetch(`http://localhost:8080/ContactManager/contacts`)
+            fetch(`http://localhost:8080/ContactManager/persons`)
                     .then(response => {
                         return response.json();
                     })
@@ -59,8 +61,10 @@
                         <ul className="contacts-list">
                             {
                                 this.state.contacts.map(function (el) {
+                                    console.log(el.id)
                                     return <Contact
                                             key={el.id}
+                                            reactKey={el.id}
                                             imagePath={el.imagePath}
                                             name={el.name}
                                             surname={el.surname}

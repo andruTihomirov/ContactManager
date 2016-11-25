@@ -29,14 +29,13 @@ public class PersonDAO implements DAO<Person, Long> {
     public List<Person> getAll() {
         Session session = this.sessionFactory.getCurrentSession();
         List<Person> persons = session.createQuery("from Person").list();
-        for(Person person : persons){
-            logger.info("Person: " + person);
-        }
         return persons;
     }
 
     public Person find(Long id) {
-        return null;
+        Session session = this.sessionFactory.getCurrentSession();
+        Person person = (Person) session.load(Person.class, id);
+        return person;
     }
 
     public Person update(Person entity) {
