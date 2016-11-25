@@ -24,9 +24,8 @@
                     <li className="contact">
                         <img className="contact-image" src={this.props.image} width="60px" height="60px"/>
                         <div className="contact-info">
-                            <div className="contact-name"> {this.props.name} {this.props.surename} </div>
-                            <div className="contact-number"> {this.props.home} </div>
-                            <div className="contact-number"> {this.props.work} </div>
+                            <div className="contact-name"> {this.props.name} {this.props.surname} </div>
+                            <div className="contact-number"> {this.props.phoneNumbers} </div>
                             <div>address: {this.props.address}</div>
                         </div>
                     </li>
@@ -63,9 +62,10 @@
                                     return <Contact
                                             key={el.id}
                                             name={el.name}
-                                            surename={el.surename}
-                                            home={el  .phoneNumbers.home}
-                                            work={el.phoneNumbers.work}
+                                            surname={el.surname}
+                                            phoneNumbers={el.phoneNumbers}
+                                            <%--home={el.phoneNumbers.home}--%>
+                                            <%--work={el.phoneNumbers.work}--%>
                                             dob={el.dob}
                                             address={el.address}
                                             image={el.image}

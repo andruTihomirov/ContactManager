@@ -1,29 +1,55 @@
 package com.itechart.contactmanager.model;
 
-import java.util.List;
+import javax.persistence.*;
 
 /**
  * Created by andrei.tsikhamirau on 11/23/2016.
  */
+
+@Entity
+@Table(name="PERSON")
 public class Person {
 
+    @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name="name")
     private String name;
+
+    @Column(name="surname")
     private String surname;
+
+    @Column(name="patronymic")
     private String patronymic;
-    private List<String> phoneNumbers;
+
+    @Column(name="phoneNumbers")
+    private String phoneNumbers;
+
+    @Column(name="dob")
     private String dob;
+
+    @Column(name="address")
     private String address;
 
     public Person() {
     }
 
-    public Person(String name, String surname, String patronymic, List phoneNumbers, String dob, String address) {
+    public Person(String name, String surname, String patronymic, String phoneNumbers, String dob, String address) {
         this.name = name;
         this.surname = surname;
         this.patronymic = patronymic;
         this.phoneNumbers = phoneNumbers;
         this.dob = dob;
         this.address = address;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -50,11 +76,11 @@ public class Person {
         this.patronymic = patronymic;
     }
 
-    public List getPhoneNumbers() {
+    public String getPhoneNumbers() {
         return phoneNumbers;
     }
 
-    public void setPhoneNumbers(List phoneNumbers) {
+    public void setPhoneNumbers(String phoneNumbers) {
         this.phoneNumbers = phoneNumbers;
     }
 
@@ -72,5 +98,11 @@ public class Person {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    @Override
+    public String toString() {
+        return "ID: [" + id + "] Name: [" + name + "] Surname: [" + surname + "] Patronymic: [" + patronymic +
+                "] PhoneNumbers: [" + phoneNumbers + "] DOB: [" + dob + "] Address: [" + address + "]";
     }
 }
