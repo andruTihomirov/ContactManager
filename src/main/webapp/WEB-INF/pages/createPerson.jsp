@@ -65,37 +65,9 @@
                                 <td><input id-="imagePath" name="imagePath" type="text" /></td>
                             </tr>
                         </table>
-                        <%--<div>--%>
-                            <%--<label htmlFor="name">Name: </label>--%>
-                            <%--<input id="name" name="name" type="text" placeholder=""/>--%>
-                        <%--</div>--%>
-                        <%--<div>--%>
-                            <%--<label htmlFor="surname">Surname: </label>--%>
-                            <%--<input id="surname" name="surname" type="text" />--%>
-                        <%--</div>--%>
-                        <%--<div>--%>
-                            <%--<label htmlFor="patronymic">Patronymic: </label>--%>
-                            <%--<input id="patronymic" name="patronymic" type="text" />--%>
-                        <%--</div>--%>
-                        <%--<div>--%>
-                            <%--<label htmlFor="phoneNumbers">Phone Numbers: </label>--%>
-                            <%--<input id="phoneNumbers" name="phoneNumbers" type="text" />--%>
-                        <%--</div>--%>
-                        <%--<div>--%>
-                            <%--<label htmlFor="dob">DOB: </label>--%>
-                            <%--<input id="dob" name="dob" type="text" />--%>
-                        <%--</div>--%>
-                        <%--<div>--%>
-                            <%--<label htmlFor="address">Address: </label>--%>
-                            <%--<input id-="address" name="address" type="text" />--%>
-                        <%--</div>--%>
-                        <%--<div>--%>
-                            <%--<label htmlFor="imagePath">Image Path: </label>--%>
-                            <%--<input id-="imagePath" name="imagePath" type="text" />--%>
-                        <%--</div>--%>
-                        <%--<div>--%>
-                            <%--<input type="submit" value="Apply" />--%>
-                        <%--</div>--%>
+                        <div>
+                            <input type="submit" value="Apply" />
+                        </div>
                     </form>
             );
         };
