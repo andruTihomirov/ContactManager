@@ -6,10 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -28,16 +25,40 @@ public class GetContactsController {
     }
 
     @RequestMapping(value = "/persons", method = RequestMethod.GET)
-    public @ResponseBody List<Person> getContacts() {
+    public @ResponseBody List<Person> getPersons() {
         List<Person> persons = dao.getAll();
         return persons;
     }
 
-    @RequestMapping("/edit/{id}")
-    public String editPerson(@PathVariable("id") Long id, Model model) {
-        Person person = (Person) dao.find(id);
-        model.addAttribute("person", person);
-        return "edit";
+    @RequestMapping("/create")
+    public String createPerson() {
+        return "createPerson";
+    }
+
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    public String addPerson(
+            @ModelAttribute("name") String name,
+            @ModelAttribute("surname") String surname,
+            @ModelAttribute("patronymic") String patronymic,
+            @ModelAttribute("phoneNumbers") String phoneNumbers,
+            @ModelAttribute("dob") String dob,
+            @ModelAttribute("address") String address,
+            @ModelAttribute("imagePath") String imagePath) {
+        Person person = new Person(name, surname, patronymic, phoneNumbers, dob, address, imagePath);
+        dao.add(person);
+        return "persons";
+    }
+
+    @RequestMapping("/update/{id}")
+    public String updatePerson(@PathVariable("id") Long id) {
+        return "persons";
+    }
+
+    @RequestMapping("/delete/{id}")
+    public String deletePerson(@PathVariable("id") Long id) {
+        System.out.println("DELETE: called.");
+        dao.delete(id);
+        return "persons";
     }
 
     @Autowired(required = true)

@@ -27,8 +27,8 @@
                             <div className="contact-name"> {this.props.name} {this.props.surname} </div>
                             <div className="contact-number"> {this.props.phoneNumbers} </div>
                             <div>address: {this.props.address}</div>
-                            <div><a href={"http://localhost:8080/ContactManager/edit/" + this.props.reactKey}>edit</a></div>
-                            <div><a href="#">delete</a></div>
+                            <div><a href={"http://localhost:8080/ContactManager/update/" + this.props.reactKey}>edit</a></div>
+                            <div><a href={"http://localhost:8080/ContactManager/delete/" + this.props.reactKey}>delete</a></div>
                         </div>
                     </li>
             );
@@ -58,10 +58,10 @@
             return (
                     <div className="contacts">
                         <h1>Contact Manager</h1>
+                        <a href="http://localhost:8080/ContactManager/create">Create</a>
                         <ul className="contacts-list">
                             {
                                 this.state.contacts.map(function (el) {
-                                    console.log(el.id)
                                     return <Contact
                                             key={el.id}
                                             reactKey={el.id}

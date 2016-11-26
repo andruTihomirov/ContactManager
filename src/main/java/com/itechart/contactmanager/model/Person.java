@@ -38,13 +38,15 @@ public class Person {
     public Person() {
     }
 
-    public Person(String name, String surname, String patronymic, String phoneNumbers, String dob, String address) {
+    public Person(String name, String surname, String patronymic, String phoneNumbers, String dob,
+                  String address, String imagePath) {
         this.name = name;
         this.surname = surname;
         this.patronymic = patronymic;
         this.phoneNumbers = phoneNumbers;
         this.dob = dob;
         this.address = address;
+        this.imagePath = imagePath;
     }
 
     public Long getId() {

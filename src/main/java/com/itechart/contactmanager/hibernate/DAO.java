@@ -9,12 +9,12 @@ public interface DAO<E, K> {
 
     List<E> getAll();
 
-    E find(K id);
+    E get(K id);
 
     E update(E entity);
 
     boolean delete(K id);
 
-    boolean create(E entity);
+    void add(E entity);
 
 }

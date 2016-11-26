@@ -32,7 +32,7 @@ public class PersonDAO implements DAO<Person, Long> {
         return persons;
     }
 
-    public Person find(Long id) {
+    public Person get(Long id) {
         Session session = this.sessionFactory.getCurrentSession();
         Person person = (Person) session.load(Person.class, id);
         return person;
@@ -43,10 +43,17 @@ public class PersonDAO implements DAO<Person, Long> {
     }
 
     public boolean delete(Long id) {
+        Session session = this.sessionFactory.getCurrentSession();
+        Person person = (Person) session.load(Person.class, id);
+        if(null != person){
+            session.delete(person);
+            return true;
+        }
         return false;
     }
 
-    public boolean create(Person entity) {
-        return false;
+    public void add(Person person) {
+        Session session = this.sessionFactory.getCurrentSession();
+        session.persist(person);
     }
 }
