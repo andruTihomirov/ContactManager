@@ -53,8 +53,12 @@
 		</property>
 	</bean>
 
-	<bean id="personDAO" class="com.itechart.contactmanager.hibernate.impl.PersonDAO">
+	<bean id="personDAO" class="com.itechart.contactmanager.hibernate.impl.PersonDAOImpl">
 		<property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+	</bean>
+
+	<bean id="personService" class="com.itechart.contactmanager.services.impl.PersonServiceImpl">
+		<property name="personDAO" ref="personDAO"></property>
 	</bean>
 
 	<bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">

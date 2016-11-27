@@ -7,32 +7,32 @@ import javax.persistence.*;
  */
 
 @Entity
-@Table(name="PERSON")
+@Table(name = "PERSON")
 public class Person {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name="imagePath")
+    @Column(name = "imagePath")
     private String imagePath;
 
-    @Column(name="name")
+    @Column(name = "name")
     private String name;
 
-    @Column(name="surname")
+    @Column(name = "surname")
     private String surname;
 
-    @Column(name="patronymic")
+    @Column(name = "patronymic")
     private String patronymic;
 
-    @Column(name="phoneNumbers")
+    @Column(name = "phoneNumbers")
     private String phoneNumbers;
 
-    @Column(name="dob")
+    @Column(name = "dob")
     private String dob;
 
-    @Column(name="address")
+    @Column(name = "address")
     private String address;
 
     public Person() {

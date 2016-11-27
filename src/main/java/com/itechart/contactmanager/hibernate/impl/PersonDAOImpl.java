@@ -1,6 +1,6 @@
 package com.itechart.contactmanager.hibernate.impl;
 
-import com.itechart.contactmanager.hibernate.DAO;
+import com.itechart.contactmanager.hibernate.PersonDAO;
 import com.itechart.contactmanager.model.Person;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -16,13 +16,13 @@ import java.util.List;
  */
 @Repository
 @Transactional
-public class PersonDAO implements DAO<Person, Long> {
+public class PersonDAOImpl implements PersonDAO {
 
-    private static final Logger logger = LoggerFactory.getLogger(PersonDAO.class);
+    private static final Logger logger = LoggerFactory.getLogger(PersonDAOImpl.class);
 
     private SessionFactory sessionFactory;
 
-    public void setSessionFactory(SessionFactory sessionFactory){
+    public void setSessionFactory(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
 
@@ -45,7 +45,7 @@ public class PersonDAO implements DAO<Person, Long> {
     public boolean delete(Long id) {
         Session session = this.sessionFactory.getCurrentSession();
         Person person = (Person) session.load(Person.class, id);
-        if(null != person){
+        if (null != person) {
             session.delete(person);
             return true;
         }

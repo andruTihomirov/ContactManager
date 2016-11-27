@@ -45,7 +45,7 @@
         };
 
         componentDidMount() {
-            fetch(`http://localhost:8080/ContactManager/persons`)
+            fetch("http://localhost:8080/ContactManager/person")
                     .then(response => {
                         return response.json();
                     })

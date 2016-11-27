@@ -1,11 +1,11 @@
 package com.itechart.contactmanager.controllers;
 
-import com.itechart.contactmanager.hibernate.DAO;
+import com.itechart.contactmanager.hibernate.PersonDAO;
 import com.itechart.contactmanager.model.Person;
+import com.itechart.contactmanager.services.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,7 +17,7 @@ import java.util.List;
 @RequestMapping("/")
 public class GetContactsController {
 
-    private DAO dao;
+    private PersonService personService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String getMainPage() {
@@ -25,8 +25,10 @@ public class GetContactsController {
     }
 
     @RequestMapping(value = "/persons", method = RequestMethod.GET)
-    public @ResponseBody List<Person> getPersons() {
-        List<Person> persons = dao.getAll();
+    public
+    @ResponseBody
+    List<Person> getPersons() {
+        List<Person> persons = personService.getAllPersons();
         return persons;
     }
 
@@ -45,7 +47,7 @@ public class GetContactsController {
             @ModelAttribute("address") String address,
             @ModelAttribute("imagePath") String imagePath) {
         Person person = new Person(name, surname, patronymic, phoneNumbers, dob, address, imagePath);
-        dao.add(person);
+        personService.addPerson(person);
         return "persons";
     }
 
@@ -57,14 +59,14 @@ public class GetContactsController {
     @RequestMapping("/delete/{id}")
     public String deletePerson(@PathVariable("id") Long id) {
         System.out.println("DELETE: called.");
-        dao.delete(id);
+        personService.deletePerson(id);
         return "persons";
     }
 
     @Autowired(required = true)
-    @Qualifier(value = "personDAO")
-    public void setPersonService(DAO personDAO) {
-        this.dao = personDAO;
+    @Qualifier(value = "personService")
+    public void setPersonService(PersonService personService) {
+        this.personService = personService;
     }
 
 }
