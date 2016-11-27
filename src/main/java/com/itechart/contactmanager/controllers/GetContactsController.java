@@ -25,9 +25,7 @@ public class GetContactsController {
     }
 
     @RequestMapping(value = "/persons", method = RequestMethod.GET)
-    public
-    @ResponseBody
-    List<Person> getPersons() {
+    public @ResponseBody List<Person> getPersons() {
         List<Person> persons = personService.getAllPersons();
         return persons;
     }

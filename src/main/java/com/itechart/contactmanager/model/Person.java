@@ -1,13 +1,14 @@
 package com.itechart.contactmanager.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * Created by andrei.tsikhamirau on 11/23/2016.
  */
 
 @Entity
-@Table(name = "PERSON")
+@Table(name = "person")
 public class Person {
 
     @Id
@@ -34,6 +35,9 @@ public class Person {
 
     @Column(name = "address")
     private String address;
+
+//    @OneToMany(mappedBy = "person")
+//    private List<Phones> phones;
 
     public Person() {
     }
@@ -112,6 +116,14 @@ public class Person {
     public void setAddress(String address) {
         this.address = address;
     }
+
+//    public List<Phones> getPhones() {
+//        return phones;
+//    }
+//
+//    public void setPhones(List<Phones> phones) {
+//        this.phones = phones;
+//    }
 
     @Override
     public String toString() {

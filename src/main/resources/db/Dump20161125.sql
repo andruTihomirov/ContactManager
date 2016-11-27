@@ -43,7 +43,11 @@ CREATE TABLE `person` (
 
 LOCK TABLES `person` WRITE;
 /*!40000 ALTER TABLE `person` DISABLE KEYS */;
-INSERT INTO `person` VALUES (1,'Darth','Vader',' - ','+250966666666','01/01/1991','address1','/ContactManager/static/img/darth.gif'),(2,'Princess','Leia',' - ','+789589745934','01/01/1992','address2','/ContactManager/static/img/leia.gif'),(3,'Luke','Skywalker',' - ','+093495757223','01/01/1993','address3','/ContactManager/static/img/luke.gif'),(4,'Chewbacca',' - ',' - ','+234923874567','01/01/1994','address4','/ContactManager/static/img/chewbacca.gif');
+INSERT INTO `person` VALUES
+(1,'Darth','Vader',' - ','+250966666666','01/01/1991','address1','/ContactManager/static/img/darth.gif'),
+(2,'Princess','Leia',' - ','+789589745934','01/01/1992','address2','/ContactManager/static/img/leia.gif'),
+(3,'Luke','Skywalker',' - ','+093495757223','01/01/1993','address3','/ContactManager/static/img/luke.gif'),
+(4,'Chewbacca',' - ',' - ','+234923874567','01/01/1994','address4','/ContactManager/static/img/chewbacca.gif');
 /*!40000 ALTER TABLE `person` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
