@@ -27,7 +27,7 @@
                             <div className="contact-name"> {this.props.name} {this.props.surname} </div>
                             <div className="contact-number"> {this.props.phoneNumbers} </div>
                             <div>address: {this.props.address}</div>
-                            <div><a href={"http://localhost:8080/ContactManager/update/" + this.props.reactKey}>edit</a></div>
+                            <div><a href={"http://localhost:8080/ContactManager/edit/" + this.props.reactKey}>edit</a></div>
                             <div><a href={"http://localhost:8080/ContactManager/delete/" + this.props.reactKey}>delete</a></div>
                         </div>
                     </li>

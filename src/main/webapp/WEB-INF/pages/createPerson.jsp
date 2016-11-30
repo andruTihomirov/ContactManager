@@ -27,31 +27,6 @@
             };
         };
 
-        addPhone() {
-            console.log("addPhone");
-            var table = document.getElementById("myTable");
-            var rowCount = table.rows.length;
-            var row = table.insertRow(rowCount);
-            var cell1 = row.insertCell(0);
-            var cell2 = row.insertCell(1);
-            cell1.innerHTML = "Phone";
-
-            var inputText = document.createElement("input");
-            inputText.setAttribute("id", "phoneNumbers");
-            inputText.setAttribute("type", "text");
-            inputText.setAttribute("name", "phoneNumbers");
-
-            var deleteButton = document.createElement("input");
-            deleteButton.setAttribute("id", "deleteButton");
-            deleteButton.setAttribute("type", "button");
-            // deleteButton.setAttribute("onclick", );
-            deleteButton.setAttribute("value", " - ");
-
-            cell2.appendChild(inputText);
-            cell2.appendChild(deleteButton);
-        };
-
-
         render() {
             return (
                     <div>
@@ -89,9 +64,7 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <div>
-                            <Button onButtonClicked={this.addPhone}/>
-                        </div>
+                        <div id="phonesContainer"></div>
                         <div>
                             <input type="submit" value="Apply" />
                         </div>
@@ -101,15 +74,70 @@
         };
     };
 
-    class Button extends Component {
-        render(){
+    class Phones extends Component {
+        deleteElement() {
+            console.log("remove");
+        };
+
+        render() {
             return (
-                <input type="button" onClick={this.props.onButtonClicked} value="Add phone"/>
+                    <ul>
+                        {this.props.items.map((task, taskIndex) =>
+                                <li key={taskIndex}>
+                                    {task}
+                                    <input type="text"></input>
+                                    <button onClick={this.props.deleteTask} value={taskIndex}> - </button>
+                                </li>
+                        )}
+                    </ul>
             );
         };
     };
 
-    render(<Person />, document.getElementById("content"));
+    var PhonesViewer = React.createClass ({
+        getInitialState: function () {
+            return {
+                items: []
+            }
+        },
+
+        deleteTask: function (e) {
+            var taskIndex = parseInt(e.target.value, 10);
+            console.log('remove task: %d', taskIndex);
+            this.setState(state => {
+                state.items.splice(taskIndex, 1);
+                return {items: state.items};
+            });
+        },
+
+        addTask: function (e) {
+            this.setState({
+                items: this.state.items.concat([this.state.task])
+            });
+
+            e.preventDefault();
+        },
+
+        render: function () {
+            return (
+                    <div>
+                        <Phones items={this.state.items} deleteTask={this.deleteTask}/>
+
+                        <form onSubmit={this.addTask}>
+                            <button> Add Phone</button>
+                        </form>
+                    </div>
+            );
+        }
+    });
+
+
+    render(
+            <div>
+                <Person />
+                <PhonesViewer />
+            </div>,
+            document.getElementById("content"));
 
 </script>
 </body>

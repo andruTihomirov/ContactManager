@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -47,6 +49,11 @@ public class GetContactsController {
         Person person = new Person(name, surname, patronymic, phoneNumbers, dob, address, imagePath);
         personService.addPerson(person);
         return "persons";
+    }
+
+    @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
+    public String editPerson() {
+        return "editPerson";
     }
 
     @RequestMapping("/update/{id}")

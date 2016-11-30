@@ -36,8 +36,8 @@ public class Person {
     @Column(name = "address")
     private String address;
 
-//    @OneToMany(mappedBy = "person")
-//    private List<Phones> phones;
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "person")
+    private List<Phones> phones;
 
     public Person() {
     }
@@ -117,13 +117,13 @@ public class Person {
         this.address = address;
     }
 
-//    public List<Phones> getPhones() {
-//        return phones;
-//    }
-//
-//    public void setPhones(List<Phones> phones) {
-//        this.phones = phones;
-//    }
+    public List<Phones> getPhones() {
+        return phones;
+    }
+
+    public void setPhones(List<Phones> phones) {
+        this.phones = phones;
+    }
 
     @Override
     public String toString() {

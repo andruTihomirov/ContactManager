@@ -3,6 +3,7 @@ package com.itechart.contactmanager.services.impl;
 import com.itechart.contactmanager.hibernate.PersonDAO;
 import com.itechart.contactmanager.model.Person;
 import com.itechart.contactmanager.services.PersonService;
+import org.hibernate.Hibernate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -33,7 +34,9 @@ public class PersonServiceImpl implements PersonService {
 
     @Transactional
     public Person getPerson(Long id) {
-        return personDAO.get(id);
+        Person person = personDAO.get(id);
+        Hibernate.initialize(person);
+        return person;
     }
 
     @Transactional

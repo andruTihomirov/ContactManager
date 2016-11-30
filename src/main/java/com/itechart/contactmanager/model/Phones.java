@@ -12,12 +12,12 @@ public class Phones {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "imagePath")
+    @Column(name = "number")
     private String number;
 
-//    @ManyToOne
-//    @JoinColumn(name = "person_id", nullable = false)
-//    private Person person;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "person_id", nullable = false)
+    private Person person;
 
     public Long getId() {
         return id;
@@ -35,11 +35,11 @@ public class Phones {
         this.number = number;
     }
 
-//    public Person getPerson() {
-//        return person;
-//    }
-//
-//    public void setPerson(Person person) {
-//        this.person = person;
-//    }
+    public Person getPerson() {
+        return person;
+    }
+
+    public void setPerson(Person person) {
+        this.person = person;
+    }
 }
