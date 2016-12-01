@@ -1,11 +1,18 @@
 package com.itechart.contactmanager.model;
 
-import org.hibernate.annotations.*;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
-import javax.persistence.*;
-import javax.persistence.Entity;
-import javax.persistence.Table;
 import java.util.List;
 
 /**
@@ -43,6 +50,7 @@ public class Person {
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "person")
     @Cascade({CascadeType.ALL})
+    @JsonInclude(Include.NON_EMPTY)
     private List<Phone> phones;
 
     public Person() {

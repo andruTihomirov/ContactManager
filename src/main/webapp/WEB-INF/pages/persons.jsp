@@ -36,15 +36,21 @@
         render() {
             return (
                     <li className="contact">
-                        <img className="contact-image" src={this.props.imagePath} width="60px" height="60px"/>
+                        <img className="contact-image" src={this.props.el.imagePath} width="60px" height="60px"/>
                         <div className="contact-info">
-                            <div className="contact-name"> {this.props.name} {this.props.surname} </div>
-                            <div className="contact-number"> {this.props.phoneNumbers} </div>
-                            <div>address: {this.props.address}</div>
+                            <div className="contact-name"> {this.props.el.name} {this.props.el.surname} </div>
+                            <div>
+                                {this.props.el.phones.map(
+                                        function(phone) {
+                                            return <div key={phone.id} className="contact-number">{phone.number}</div>;
+                                        }
+                                )}
+                            </div>
+                            <div>address: {this.props.el.address}</div>
                             <div><a href="#">edit</a>
                             </div>
                             <div>
-                                <a href={"http://localhost:8080/ContactManager/delete/" + this.props.reactKey}>delete</a>
+                                <a href={"http://localhost:8080/ContactManager/delete/" + this.props.el.reactKey}>delete</a>
                             </div>
                         </div>
                     </li>
@@ -79,16 +85,7 @@
                         <ul className="contacts-list">
                             {
                                 this.state.contacts.map(function (el) {
-                                    return <Person
-                                            key={el.id}
-                                            reactKey={el.id}
-                                            imagePath={el.imagePath}
-                                            name={el.name}
-                                            surname={el.surname}
-                                            phoneNumbers={el.phoneNumbers}
-                                            dob={el.dob}
-                                            address={el.address}
-                                    />;
+                                    return <Person key={el.id} el={el}/>;
                                 })
                             }
                         </ul>
