@@ -1,12 +1,14 @@
 package com.itechart.contactmanager.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 /**
  * Created by Andru on 27.11.2016.
  */
 @Entity
-public class Phones {
+public class Phone {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,6 +19,7 @@ public class Phones {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "person_id", nullable = false)
+    @JsonIgnore
     private Person person;
 
     public Long getId() {

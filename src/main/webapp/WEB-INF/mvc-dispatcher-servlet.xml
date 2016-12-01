@@ -43,7 +43,7 @@
 		<property name="annotatedClasses">
 			<list>
 				<value>com.itechart.contactmanager.model.Person</value>
-				<value>com.itechart.contactmanager.model.Phones</value>
+				<value>com.itechart.contactmanager.model.Phone</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">

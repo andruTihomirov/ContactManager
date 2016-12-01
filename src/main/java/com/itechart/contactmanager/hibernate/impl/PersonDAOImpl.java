@@ -2,6 +2,7 @@ package com.itechart.contactmanager.hibernate.impl;
 
 import com.itechart.contactmanager.hibernate.PersonDAO;
 import com.itechart.contactmanager.model.Person;
+import com.itechart.contactmanager.model.Phone;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
@@ -54,6 +55,10 @@ public class PersonDAOImpl implements PersonDAO {
 
     public void add(Person person) {
         Session session = this.sessionFactory.getCurrentSession();
+        List<Phone> phones = person.getPhones();
+        for(Phone phone: phones) {
+            phone.setPerson(person);
+        }
         session.persist(person);
     }
 }

@@ -1,6 +1,11 @@
 package com.itechart.contactmanager.model;
 
+import org.hibernate.annotations.*;
+import org.hibernate.annotations.CascadeType;
+
 import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.List;
 
 /**
@@ -37,7 +42,8 @@ public class Person {
     private String address;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "person")
-    private List<Phones> phones;
+    @Cascade({CascadeType.SAVE_UPDATE})
+    private List<Phone> phones;
 
     public Person() {
     }
@@ -117,17 +123,26 @@ public class Person {
         this.address = address;
     }
 
-    public List<Phones> getPhones() {
+    public List<Phone> getPhones() {
         return phones;
     }
 
-    public void setPhones(List<Phones> phones) {
+    public void setPhones(List<Phone> phones) {
         this.phones = phones;
     }
 
     @Override
     public String toString() {
-        return "ID: [" + id + "] Name: [" + name + "] Surname: [" + surname + "] Patronymic: [" + patronymic +
-                "] PhoneNumbers: [" + phoneNumbers + "] DOB: [" + dob + "] Address: [" + address + "]";
+        String topLevelData = "ID: [" + id + "]\nName: [" + name + "]\nSurname: [" + surname + "]\nPatronymic: [" + patronymic +
+                "]\nDOB: [" + dob + "]\nAddress: [" + address + "]";
+
+        String innerData = "";
+        if(phones != null) {
+            for(Phone phone : phones) {
+                    innerData += "\n" + phone.getNumber();
+            }
+        }
+
+        return topLevelData + innerData;
     }
 }

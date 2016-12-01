@@ -55,12 +55,11 @@ UNLOCK TABLES;
 -- Table structure for table `phones`
 --
 
-DROP TABLE IF EXISTS `phones`;
+DROP TABLE IF EXISTS `phone`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `phones` (
+CREATE TABLE `phone` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `imagePath` varchar(255) DEFAULT NULL,
   `number` varchar(255) DEFAULT NULL,
   `person_id` bigint(20) NOT NULL,
   PRIMARY KEY (`id`)
@@ -71,7 +70,7 @@ CREATE TABLE `phones` (
 -- Dumping data for table `phones`
 --
 
-LOCK TABLES `phones` WRITE;
+LOCK TABLES `phone` WRITE;
 /*!40000 ALTER TABLE `phones` DISABLE KEYS */;
 /*!40000 ALTER TABLE `phones` ENABLE KEYS */;
 UNLOCK TABLES;

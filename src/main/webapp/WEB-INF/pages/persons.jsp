@@ -1,3 +1,6 @@
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+
 <html>
 
 <head>
@@ -23,11 +26,11 @@
 
 <script type="text/babel">
 
-    const { Component } = React;
-    const { render } = ReactDOM;
-    const { Modal } = ReactBootstrap;
-    const { Button } = ReactBootstrap;
-    const { OverlayTrigger } = ReactBootstrap;
+    const {Component} = React;
+    const {render} = ReactDOM;
+    const {Modal} = ReactBootstrap;
+    const {Button} = ReactBootstrap;
+    const {OverlayTrigger} = ReactBootstrap;
 
     class Person extends Component {
         render() {
@@ -38,8 +41,11 @@
                             <div className="contact-name"> {this.props.name} {this.props.surname} </div>
                             <div className="contact-number"> {this.props.phoneNumbers} </div>
                             <div>address: {this.props.address}</div>
-                            <div><a href={"http://localhost:8080/ContactManager/edit/" + this.props.reactKey}>edit</a></div>
-                            <div><a href={"http://localhost:8080/ContactManager/delete/" + this.props.reactKey}>delete</a></div>
+                            <div><a href="#">edit</a>
+                            </div>
+                            <div>
+                                <a href={"http://localhost:8080/ContactManager/delete/" + this.props.reactKey}>delete</a>
+                            </div>
                         </div>
                     </li>
             );
@@ -101,7 +107,7 @@
                     <ul>
                         {this.props.items.map((task, taskIndex) =>
                                 <li key={taskIndex}>
-                                    <input type="text" name={"phone_" + taskIndex}></input>
+                                    <input type="text" name={"phones[" + taskIndex + "].number"}></input>
                                     <button onClick={this.props.deleteTask} value={taskIndex}> - </button>
                                 </li>
                         )}
@@ -110,7 +116,7 @@
         };
     }
 
-    var PhonesViewer = React.createClass ({
+    var PhonesViewer = React.createClass({
         getInitialState: function () {
             return {
                 items: []
@@ -146,19 +152,19 @@
 
     const CreatePersonComponent = React.createClass({
         getInitialState() {
-            return { showModal: false };
+            return {showModal: false};
         },
 
         save() {
-            // inmplement save person
+            // implement save person
         },
 
         close() {
-            this.setState({ showModal: false });
+            this.setState({showModal: false});
         },
 
         open() {
-            this.setState({ showModal: true });
+            this.setState({showModal: true});
         },
 
         render() {
@@ -174,45 +180,48 @@
                             <Modal.Header closeButton>
                                 <Modal.Title>Create Person</Modal.Title>
                             </Modal.Header>
-                            <Modal.Body>
-                                <table id="myTable">
-                                    <tbody>
-                                    <tr>
-                                        <td>Name</td>
-                                        <td><input id="name" name="name" type="text" /></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Surname</td>
-                                        <td><input id="surname" name="surname" type="text" /></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Patronymic</td>
-                                        <td><input id="patronymic" name="patronymic" type="text" /></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Phone Numbers</td>
-                                        <td><input id="phoneNumbers" name="phoneNumbers" type="text" /></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Date Of Birth</td>
-                                        <td><input id="dob" name="dob" type="text" /></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Address</td>
-                                        <td><input id="address" name="address" type="text" /></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Image Path</td>
-                                        <td><input id="imagePath" name="imagePath" type="text" /></td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                                <PhonesViewer />
-                            </Modal.Body>
-                            <Modal.Footer>
-                                <Button onClick={this.save}>Save</Button>
-                                <Button onClick={this.close}>Close</Button>
-                            </Modal.Footer>
+                            <form:form action="http://localhost:8080/ContactManager/create" method="POST"
+                                modelAttribute="person">
+                                <Modal.Body>
+                                    <table id="myTable">
+                                        <tbody>
+                                        <tr>
+                                            <td>Name</td>
+                                            <td><input id="name" name="name" type="text"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Surname</td>
+                                            <td><input id="surname" name="surname" type="text"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Patronymic</td>
+                                            <td><input id="patronymic" name="patronymic" type="text"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Phone Numbers</td>
+                                            <td><input id="phoneNumbers" name="phoneNumbers" type="text"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Date Of Birth</td>
+                                            <td><input id="dob" name="dob" type="text"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Address</td>
+                                            <td><input id="address" name="address" type="text"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Image Path</td>
+                                            <td><input id="imagePath" name="imagePath" type="text"/></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                    <PhonesViewer />
+                                </Modal.Body>
+                                <Modal.Footer>
+                                    <input bsStyle="primary" bsSize="large" type="submit" value="Apply"/>
+                                    <Button onClick={this.close}>Close</Button>
+                                </Modal.Footer>
+                            </form:form>
                         </Modal>
                     </div>
             );

@@ -1,15 +1,16 @@
 package com.itechart.contactmanager.controllers;
 
-import com.itechart.contactmanager.hibernate.PersonDAO;
 import com.itechart.contactmanager.model.Person;
 import com.itechart.contactmanager.services.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMethod;
 
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -32,32 +33,9 @@ public class GetContactsController {
         return persons;
     }
 
-    @RequestMapping("/create")
-    public String createPerson() {
-        return "createPerson";
-    }
-
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String addPerson(
-            @ModelAttribute("name") String name,
-            @ModelAttribute("surname") String surname,
-            @ModelAttribute("patronymic") String patronymic,
-            @ModelAttribute("phoneNumbers") String phoneNumbers,
-            @ModelAttribute("dob") String dob,
-            @ModelAttribute("address") String address,
-            @ModelAttribute("imagePath") String imagePath) {
-        Person person = new Person(name, surname, patronymic, phoneNumbers, dob, address, imagePath);
+    @RequestMapping(value = "/create", method = RequestMethod.POST)
+    public String createPerson(@ModelAttribute("person") Person person) {
         personService.addPerson(person);
-        return "persons";
-    }
-
-    @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
-    public String editPerson() {
-        return "editPerson";
-    }
-
-    @RequestMapping("/update/{id}")
-    public String updatePerson(@PathVariable("id") Long id) {
         return "persons";
     }
 
@@ -68,7 +46,7 @@ public class GetContactsController {
         return "persons";
     }
 
-    @Autowired(required = true)
+    @Autowired
     @Qualifier(value = "personService")
     public void setPersonService(PersonService personService) {
         this.personService = personService;
