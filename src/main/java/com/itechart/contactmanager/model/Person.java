@@ -42,7 +42,7 @@ public class Person {
     private String address;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "person")
-    @Cascade({CascadeType.SAVE_UPDATE})
+    @Cascade({CascadeType.ALL})
     private List<Phone> phones;
 
     public Person() {
@@ -137,9 +137,9 @@ public class Person {
                 "]\nDOB: [" + dob + "]\nAddress: [" + address + "]";
 
         String innerData = "";
-        if(phones != null) {
-            for(Phone phone : phones) {
-                    innerData += "\n" + phone.getNumber();
+        if (phones != null) {
+            for (Phone phone : phones) {
+                innerData += "\n" + phone.getNumber();
             }
         }
 

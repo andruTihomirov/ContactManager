@@ -56,8 +56,10 @@ public class PersonDAOImpl implements PersonDAO {
     public void add(Person person) {
         Session session = this.sessionFactory.getCurrentSession();
         List<Phone> phones = person.getPhones();
-        for(Phone phone: phones) {
-            phone.setPerson(person);
+        if (phones != null) {
+            for (Phone phone : phones) {
+                phone.setPerson(person);
+            }
         }
         session.persist(person);
     }
