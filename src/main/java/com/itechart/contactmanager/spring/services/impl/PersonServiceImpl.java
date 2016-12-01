@@ -1,8 +1,8 @@
-package com.itechart.contactmanager.services.impl;
+package com.itechart.contactmanager.spring.services.impl;
 
-import com.itechart.contactmanager.hibernate.PersonDAO;
+import com.itechart.contactmanager.hibernate.dao.PersonDAO;
 import com.itechart.contactmanager.model.Person;
-import com.itechart.contactmanager.services.PersonService;
+import com.itechart.contactmanager.spring.services.PersonService;
 import org.hibernate.Hibernate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

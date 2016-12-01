@@ -56,11 +56,11 @@
 		</property>
 	</bean>
 
-	<bean id="personDAO" class="com.itechart.contactmanager.hibernate.impl.PersonDAOImpl">
+	<bean id="personDAO" class="com.itechart.contactmanager.hibernate.dao.impl.PersonDAOImpl">
 		<property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
 	</bean>
 
-	<bean id="personService" class="com.itechart.contactmanager.services.impl.PersonServiceImpl">
+	<bean id="personService" class="com.itechart.contactmanager.spring.services.impl.PersonServiceImpl">
 		<property name="personDAO" ref="personDAO"></property>
 	</bean>
 

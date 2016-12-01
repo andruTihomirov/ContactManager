@@ -1,7 +1,7 @@
-package com.itechart.contactmanager.controllers;
+package com.itechart.contactmanager.spring.controllers;
 
 import com.itechart.contactmanager.model.Person;
-import com.itechart.contactmanager.services.PersonService;
+import com.itechart.contactmanager.spring.services.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;

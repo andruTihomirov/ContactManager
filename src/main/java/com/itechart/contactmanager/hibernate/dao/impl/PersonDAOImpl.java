@@ -1,6 +1,6 @@
-package com.itechart.contactmanager.hibernate.impl;
+package com.itechart.contactmanager.hibernate.dao.impl;
 
-import com.itechart.contactmanager.hibernate.PersonDAO;
+import com.itechart.contactmanager.hibernate.dao.PersonDAO;
 import com.itechart.contactmanager.model.Person;
 import com.itechart.contactmanager.model.Phone;
 import org.hibernate.Session;

@@ -1,4 +1,4 @@
-package com.itechart.contactmanager.services;
+package com.itechart.contactmanager.spring.services;
 
 import com.itechart.contactmanager.model.Person;
 

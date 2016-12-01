@@ -1,4 +1,4 @@
-package com.itechart.contactmanager.hibernate;
+package com.itechart.contactmanager.hibernate.dao;
 
 import com.itechart.contactmanager.model.Person;
 
