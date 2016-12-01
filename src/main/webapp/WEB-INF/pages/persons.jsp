@@ -50,7 +50,7 @@
                             <div><a href="#">edit</a>
                             </div>
                             <div>
-                                <a href={"http://localhost:8080/ContactManager/delete/" + this.props.el.reactKey}>delete</a>
+                                <a href={"http://localhost:8080/ContactManager/delete/" + this.props.reactKey}>delete</a>
                             </div>
                         </div>
                     </li>
@@ -85,7 +85,7 @@
                         <ul className="contacts-list">
                             {
                                 this.state.contacts.map(function (el) {
-                                    return <Person key={el.id} el={el}/>;
+                                    return <Person key={el.id} reactKey={el.id} el={el}/>;
                                 })
                             }
                         </ul>
