@@ -47,7 +47,8 @@
                                 )}
                             </div>
                             <div>address: {this.props.el.address}</div>
-                            <div><a href="#">edit</a>
+                            <div>
+                                <EditPerson person={this.props.el}/>
                             </div>
                             <div>
                                 <a href={"http://localhost:8080/ContactManager/delete/" + this.props.reactKey}>delete</a>
@@ -81,7 +82,7 @@
             return (
                     <div className="contacts">
                         <h1>Person Manager</h1>
-                        <CreatePersonComponent />
+                        <CreatePerson />
                         <ul className="contacts-list">
                             {
                                 this.state.contacts.map(function (el) {
@@ -94,66 +95,101 @@
         };
     }
 
-    class Phones extends Component {
-        deleteElement() {
-            console.log("remove");
-        };
-
+    class Phone extends Component {
         render() {
             return (
-                    <ul>
-                        {this.props.items.map((task, taskIndex) =>
-                                <li key={taskIndex}>
-                                    <input type="text" name={"phones[" + taskIndex + "].number"}></input>
-                                    <button onClick={this.props.deleteTask} value={taskIndex}> - </button>
-                                </li>
-                        )}
-                    </ul>
+                    <li>
+                        <input type="text" name={"phones[" + this.props.reactKey + "].number"}
+                               defaultValue={typeof(this.props.phone) != "undefined" ? this.props.phone : ""}/>
+                        <button onClick={this.props.deleteItem}> - </button>
+                    </li>
             );
         };
     }
 
-    var PhonesViewer = React.createClass({
-        getInitialState: function () {
-            return {
-                items: []
+    class PhonesViewer extends Component {
+        constructor() {
+            super();
+            this.state = {
+                phones: []
+            };
+        };
+
+        componentDidMount() {
+            if(this.props.phones !=  "undefined") {
+                var newArray = this.state.phones.slice();
+                this.props.phones.map((phone, i) => {
+                    newArray.push(<Phone key={phone.id} phone={phone.number} deleteItem={this.deleteItem.bind(this)} />);
+                });
+                this.setState({
+                    phones: newArray
+                });
             }
-        },
+        };
 
-        deleteTask: function (e) {
-            var taskIndex = parseInt(e.target.value, 10);
-            console.log('remove task: %d', taskIndex);
-            this.setState(state => {
-                state.items.splice(taskIndex, 1);
-                return {items: state.items};
-            });
-        },
-
-        addTask: function (e) {
+        addItem(e) {
             this.setState({
-                items: this.state.items.concat([this.state.task])
+                phones: this.state.phones.concat(<Phone deleteItem={this.deleteItem.bind(this)} />)
             });
+        };
 
-            e.preventDefault();
-        },
+        deleteItem(e) {
+            var newData = this.state.phones.slice();
+            newData.splice(0, 1);
+            this.setState({
+                phones: newData
+            });
+        };
 
-        render: function () {
+        render() {
+            var coms = [];
             return (
                     <div>
-                        <Phones items={this.state.items} deleteTask={this.deleteTask}/>
-                        <button onClick={this.addTask}> Add Phone</button>
+                        {[...Array(this.state.phones)].map((phone, i) =>
+                                phone
+                        )}
+                        <button onClick={this.addItem.bind(this)}>Add Phone</button>
                     </div>
+            )
+        };
+    };
+
+    const EditPerson = React.createClass({
+
+        updateAction() {
+            console.log("update " + this.props.person.name);
+        },
+
+        render() {
+            return (
+                <div>
+                    <ModalWindow name={"Update Person"} person={this.props.person} saveAction={this.updateAction} />
+                </div>
             );
         }
     });
 
-    const CreatePersonComponent = React.createClass({
-        getInitialState() {
-            return {showModal: false};
+
+    const CreatePerson = React.createClass({
+
+        saveAction() {
+            console.log("save");
         },
 
-        save() {
-            // implement save person
+        render() {
+            return (
+                <div>
+                    <ModalWindow name={"Crete Person"} saveAction={this.saveAction} />
+                </div>
+            );
+        }
+    });
+
+
+    const ModalWindow = React.createClass({
+
+        getInitialState() {
+            return {showModal: false};
         },
 
         close() {
@@ -165,66 +201,76 @@
         },
 
         render() {
-
             return (
-                    <div>
+                <div>
+                <Button bsStyle="primary" bsSize="large" onClick={this.open}>
+                    {this.props.name}
+                </Button>
+                <Modal show={this.state.showModal} onHide={this.close}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>{this.props.name}</Modal.Title>
+                    </Modal.Header>
 
-                        <Button bsStyle="primary" bsSize="large" onClick={this.open}>
-                            Create Person
-                        </Button>
+                        <Modal.Body>
+                            <table id="myTable">
+                                <tbody>
+                                <tr>
+                                    <td>Name</td>
+                                    <td><input id="name" name="name" type="text"
+                                        defaultValue={typeof(this.props.person) != "undefined" ? this.props.person.name : ""} />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Surname</td>
+                                    <td><input id="surname" name="surname" type="text"
+                                        defaultValue={typeof(this.props.person) != "undefined" ? this.props.person.surname : ""}/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Patronymic</td>
+                                    <td><input id="patronymic" name="patronymic" type="text"
+                                        defaultValue={typeof(this.props.person) != "undefined" ? this.props.person.patronymic : ""}/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Phone Numbers</td>
+                                    <td><input id="phoneNumbers" name="phoneNumbers" type="text"
+                                        defaultValue={typeof(this.props.person) != "undefined" ? this.props.person.phoneNumbers : ""}/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Date Of Birth</td>
+                                    <td><input id="dob" name="dob" type="text"
+                                        defaultValue={typeof(this.props.person) != "undefined" ? this.props.person.dob : ""}/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Address</td>
+                                    <td><input id="address" name="address" type="text"
+                                        defaultValue={typeof(this.props.person) != "undefined" ? this.props.person.address : ""}/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Image Path</td>
+                                    <td><input id="imagePath" name="imagePath" type="text"
+                                        defaultValue={typeof(this.props.person) != "undefined" ? this.props.person.imagePath : ""}/>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <PhonesViewer phones={typeof(this.props.person) != "undefined" ? this.props.person.phones : "undefined"}/>
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <input bsStyle="primary" bsSize="large" type="submit" value="Apply"/>
+                            <Button onClick={this.props.saveAction}>Save</Button>
+                            <Button onClick={this.close}>Close</Button>
+                        </Modal.Footer>
 
-                        <Modal show={this.state.showModal} onHide={this.close}>
-                            <Modal.Header closeButton>
-                                <Modal.Title>Create Person</Modal.Title>
-                            </Modal.Header>
-                            <form:form action="http://localhost:8080/ContactManager/create" method="POST"
-                                modelAttribute="person">
-                                <Modal.Body>
-                                    <table id="myTable">
-                                        <tbody>
-                                        <tr>
-                                            <td>Name</td>
-                                            <td><input id="name" name="name" type="text"/></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Surname</td>
-                                            <td><input id="surname" name="surname" type="text"/></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Patronymic</td>
-                                            <td><input id="patronymic" name="patronymic" type="text"/></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Phone Numbers</td>
-                                            <td><input id="phoneNumbers" name="phoneNumbers" type="text"/></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Date Of Birth</td>
-                                            <td><input id="dob" name="dob" type="text"/></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Address</td>
-                                            <td><input id="address" name="address" type="text"/></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Image Path</td>
-                                            <td><input id="imagePath" name="imagePath" type="text"/></td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                    <PhonesViewer />
-                                </Modal.Body>
-                                <Modal.Footer>
-                                    <input bsStyle="primary" bsSize="large" type="submit" value="Apply"/>
-                                    <Button onClick={this.close}>Close</Button>
-                                </Modal.Footer>
-                            </form:form>
-                        </Modal>
-                    </div>
+                </Modal>
+                </div>
             );
         }
     });
-
 
     render(
             <ContactsList />,
