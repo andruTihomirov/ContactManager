@@ -52,7 +52,7 @@ INSERT INTO `person` VALUES
 UNLOCK TABLES;
 
 --
--- Table structure for table `phones`
+-- Table structure for table `phone`
 --
 
 DROP TABLE IF EXISTS `phone`;
@@ -67,12 +67,12 @@ CREATE TABLE `phone` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `phones`
+-- Dumping data for table `phone`
 --
 
 LOCK TABLES `phone` WRITE;
-/*!40000 ALTER TABLE `phones` DISABLE KEYS */;
-/*!40000 ALTER TABLE `phones` ENABLE KEYS */;
+/*!40000 ALTER TABLE `phone` DISABLE KEYS */;
+/*!40000 ALTER TABLE `phone` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
