@@ -99,7 +99,8 @@
         render() {
             return (
                     <li>
-                        <input type="text" name={"phones[" + this.props.reactKey + "].number"}
+                        <input type="text" name={"phone_" + this.props.reactKey}
+                               onChange={this.props.onChangeMethod.bind(this, "phone_" + this.props.reactKey)}
                                defaultValue={typeof(this.props.phone) != "undefined" ? this.props.phone : ""}/>
                         <button onClick={this.props.deleteItem}> - </button>
                     </li>
@@ -119,7 +120,11 @@
             if(this.props.phones !=  "undefined") {
                 var newArray = this.state.phones.slice();
                 this.props.phones.map((phone, i) => {
-                    newArray.push(<Phone key={phone.id} phone={phone.number} deleteItem={this.deleteItem.bind(this)} />);
+                    newArray.push(<Phone key={phone.id}
+                                         reactKey={i}
+                                         phone={phone.number}
+                                         deleteItem={this.deleteItem.bind(this)}
+                                         onChangeMethod={this.props.onChangeMethod} />);
                 });
                 this.setState({
                     phones: newArray
@@ -128,8 +133,11 @@
         };
 
         addItem(e) {
+            var i = this.state.phones.length;
             this.setState({
-                phones: this.state.phones.concat(<Phone deleteItem={this.deleteItem.bind(this)} />)
+                phones: this.state.phones.concat(<Phone deleteItem={this.deleteItem.bind(this)}
+                                                        reactKey={i}
+                                                        onChangeMethod={this.props.onChangeMethod}/>)
             });
         };
 
@@ -156,14 +164,23 @@
 
     const EditPerson = React.createClass({
 
-        updateAction() {
-            console.log("update " + this.props.person.name);
+        updateAction(person) {
+            console.log("update");
+            console.log(person);
+            fetch('http://localhost:8080/ContactManager/update', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(person)
+            });
         },
 
         render() {
             return (
                 <div>
-                    <ModalWindow name={"Update Person"} person={this.props.person} saveAction={this.updateAction} />
+                    <ModalWindow name={"Update"} person={this.props.person} saveAction={this.updateAction} />
                 </div>
             );
         }
@@ -172,33 +189,107 @@
 
     const CreatePerson = React.createClass({
 
-        saveAction() {
-            console.log("save");
+        saveAction(person) {
+            console.log("create");
+            fetch('http://localhost:8080/ContactManager/create', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(person)
+            });
         },
 
         render() {
             return (
                 <div>
-                    <ModalWindow name={"Crete Person"} saveAction={this.saveAction} />
+                    <ModalWindow name={"Crete"} saveAction={this.saveAction} />
                 </div>
             );
         }
     });
 
 
-    const ModalWindow = React.createClass({
+    class ModalWindow extends Component {
 
-        getInitialState() {
-            return {showModal: false};
-        },
+        constructor() {
+            super();
+            this.state = {
+                showModal: false,
+                person: {
+                    id: null,
+                    name: "",
+                    surname: "",
+                    patronymic: "",
+                    dob: "",
+                    address: "",
+                    imagePath: "",
+                    phones: []
+                }
+            };
+
+            this.close = this.close.bind(this);
+            this.open = this.open.bind(this);
+        };
+
+        componentDidMount() {
+            if(typeof(this.props.person) != "undefined") {
+                var newPerson = this.state.person;
+                newPerson.id = this.props.person.id;
+                newPerson.name = this.props.person.name;
+                newPerson.surname = this.props.person.surname;
+                newPerson.patronymic = this.props.person.patronymic;
+                newPerson.dob = this.props.person.dob;
+                newPerson.address = this.props.person.address;
+                newPerson.imagePath = this.props.person.imagePath;
+
+                this.props.person.phones.map((phone, i) =>
+                        newPerson.phones.push({
+                            id: phone.id,
+                            number: phone.number
+                        })
+                );
+
+                this.setState({person: newPerson});
+            }
+        }
+
+        handleChange(fieldName, event) {
+            var newPerson = this.state.person;
+
+            if (fieldName.indexOf("phone_") !== -1) {
+                var phoneIndex = parseInt(fieldName.substr(fieldName.indexOf("_") + 1));
+//                var id = null;
+//                if (this.state.person.phones.length > 0) {
+//                    this.props.person.phones.map((phone, i) => {
+//                        if(phone.number == this.props.person.phones[phoneIndex].number) {
+//                            id = parseInt(phone.id);
+//                                newPerson.phones[phoneIndex] = {
+//                                    id: id,
+//                                    number: event.target.value
+//                                };
+//                        }
+//                    });
+//                    return;
+//                }
+                newPerson.phones[phoneIndex] = {
+                    number: event.target.value
+                };
+                return;
+            }
+
+            newPerson[fieldName] = event.target.value;
+            this.setState({person: newPerson});
+        }
 
         close() {
             this.setState({showModal: false});
-        },
+        };
 
         open() {
             this.setState({showModal: true});
-        },
+        };
 
         render() {
             return (
@@ -210,59 +301,58 @@
                     <Modal.Header closeButton>
                         <Modal.Title>{this.props.name}</Modal.Title>
                     </Modal.Header>
-
                         <Modal.Body>
                             <table id="myTable">
                                 <tbody>
                                 <tr>
                                     <td>Name</td>
                                     <td><input id="name" name="name" type="text"
-                                        defaultValue={typeof(this.props.person) != "undefined" ? this.props.person.name : ""} />
+                                            onChange={this.handleChange.bind(this, "name")}
+                                            defaultValue={typeof(this.props.person) != "undefined" ? this.props.person.name : ""} />
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Surname</td>
                                     <td><input id="surname" name="surname" type="text"
-                                        defaultValue={typeof(this.props.person) != "undefined" ? this.props.person.surname : ""}/>
+                                            onChange={this.handleChange.bind(this, "surname")}
+                                            defaultValue={typeof(this.props.person) != "undefined" ? this.props.person.surname : ""} />
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Patronymic</td>
                                     <td><input id="patronymic" name="patronymic" type="text"
-                                        defaultValue={typeof(this.props.person) != "undefined" ? this.props.person.patronymic : ""}/>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Phone Numbers</td>
-                                    <td><input id="phoneNumbers" name="phoneNumbers" type="text"
-                                        defaultValue={typeof(this.props.person) != "undefined" ? this.props.person.phoneNumbers : ""}/>
+                                            onChange={this.handleChange.bind(this, "patronymic")}
+                                            defaultValue={typeof(this.props.person) != "undefined" ? this.props.person.patronymic : ""} />
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Date Of Birth</td>
                                     <td><input id="dob" name="dob" type="text"
-                                        defaultValue={typeof(this.props.person) != "undefined" ? this.props.person.dob : ""}/>
+                                            onChange={this.handleChange.bind(this, "dob")}
+                                            defaultValue={typeof(this.props.person) != "undefined" ? this.props.person.dob : ""} />
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Address</td>
                                     <td><input id="address" name="address" type="text"
-                                        defaultValue={typeof(this.props.person) != "undefined" ? this.props.person.address : ""}/>
+                                            onChange={this.handleChange.bind(this, "address")}
+                                            defaultValue={typeof(this.props.person) != "undefined" ? this.props.person.address : ""} />
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Image Path</td>
                                     <td><input id="imagePath" name="imagePath" type="text"
-                                        defaultValue={typeof(this.props.person) != "undefined" ? this.props.person.imagePath : ""}/>
+                                            onChange={this.handleChange.bind(this, "imagePath")}
+                                            defaultValue={typeof(this.props.person) != "undefined" ? this.props.person.imagePath : ""} />
                                     </td>
                                 </tr>
                                 </tbody>
                             </table>
-                            <PhonesViewer phones={typeof(this.props.person) != "undefined" ? this.props.person.phones : "undefined"}/>
+                            <PhonesViewer phones={typeof(this.props.person) != "undefined" ? this.props.person.phones : "undefined"}
+                                onChangeMethod={this.handleChange.bind(this)} />
                         </Modal.Body>
                         <Modal.Footer>
-                            <input bsStyle="primary" bsSize="large" type="submit" value="Apply"/>
-                            <Button onClick={this.props.saveAction}>Save</Button>
+                            <Button onClick={() => this.props.saveAction(this.state.person)}>Save</Button>
                             <Button onClick={this.close}>Close</Button>
                         </Modal.Footer>
 
@@ -270,7 +360,7 @@
                 </div>
             );
         }
-    });
+    };
 
     render(
             <ContactsList />,
