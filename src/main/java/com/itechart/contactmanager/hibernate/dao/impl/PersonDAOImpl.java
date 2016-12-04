@@ -40,6 +40,7 @@ public class PersonDAOImpl implements PersonDAO {
     }
 
     public Person update(Person person) {
+        System.out.println(person);
         Session session = this.sessionFactory.getCurrentSession();
         List<Phone> phones = person.getPhones();
         if (phones != null) {
@@ -47,7 +48,7 @@ public class PersonDAOImpl implements PersonDAO {
                 phone.setPerson(person);
             }
         }
-        session.update(person);
+        session.merge(person);
         return person;
     }
 
