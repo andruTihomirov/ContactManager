@@ -1,6 +1,5 @@
 package com.itechart.contactmanager.spring.controllers;
 
-import com.itechart.contactmanager.model.Fizzle;
 import com.itechart.contactmanager.model.Person;
 import com.itechart.contactmanager.spring.services.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,10 +18,10 @@ public class GetContactsController {
 
     private PersonService personService;
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String getMainPage() {
-        return "persons";
-    }
+//    @RequestMapping(value = "/", method = RequestMethod.GET)
+//    public String getMainPage() {
+//        return "persons";
+//    }
 
     @RequestMapping(value = "/persons", method = RequestMethod.GET)
     public @ResponseBody List<Person> getPersons() {

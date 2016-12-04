@@ -13,6 +13,7 @@
         <hibernate.version>4.3.5.Final</hibernate.version>
         <aspectj.version>1.7.4</aspectj.version>
         <slf4j-version>1.7.5</slf4j-version>
+        <spring.security.version>3.2.3.RELEASE</spring.security.version>
     </properties>
 
     <dependencies>
@@ -53,6 +54,27 @@
             <version>${spring.version}</version>
         </dependency>
         <!-- Spring 4 end -->
+
+        <!-- Spring Security -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>${spring.security.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>${spring.security.version}</version>
+        </dependency>
+
+        <!-- Spring Security JSP Taglib -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-taglibs</artifactId>
+            <version>${spring.security.version}</version>
+        </dependency>
+        <!-- Spring Security end -->
 
         <!-- Hibernate -->
         <dependency>
