@@ -1,15 +1,12 @@
 package com.itechart.contactmanager.spring.controllers;
 
+import com.itechart.contactmanager.model.Fizzle;
 import com.itechart.contactmanager.model.Person;
 import com.itechart.contactmanager.spring.services.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -34,10 +31,17 @@ public class GetContactsController {
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public String createPerson(@ModelAttribute("person") Person person) {
+    public String createPerson(@RequestBody Person person) {
         personService.addPerson(person);
         return "persons";
     }
+
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    public String updatePerson(@RequestBody Person person) {
+        personService.updatePerson(person);
+        return "persons";
+    }
+
 
     @RequestMapping("/delete/{id}")
     public String deletePerson(@PathVariable("id") Long id) {

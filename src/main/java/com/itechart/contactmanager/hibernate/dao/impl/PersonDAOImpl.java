@@ -39,8 +39,17 @@ public class PersonDAOImpl implements PersonDAO {
         return person;
     }
 
-    public Person update(Person entity) {
-        return null;
+    public Person update(Person person) {
+        System.out.println(person);
+        Session session = this.sessionFactory.getCurrentSession();
+        List<Phone> phones = person.getPhones();
+        if (phones != null) {
+            for (Phone phone : phones) {
+                phone.setPerson(person);
+            }
+        }
+        session.merge(person);
+        return person;
     }
 
     public boolean delete(Long id) {

@@ -34,7 +34,7 @@ CREATE TABLE `person` (
   `address` varchar(45) DEFAULT NULL,
   `imagePath` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=74 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -43,16 +43,12 @@ CREATE TABLE `person` (
 
 LOCK TABLES `person` WRITE;
 /*!40000 ALTER TABLE `person` DISABLE KEYS */;
-INSERT INTO `person` VALUES
-(1,'Darth','Vader',' - ','+250966666666','01/01/1991','address1','/ContactManager/static/img/darth.gif'),
-(2,'Princess','Leia',' - ','+789589745934','01/01/1992','address2','/ContactManager/static/img/leia.gif'),
-(3,'Luke','Skywalker',' - ','+093495757223','01/01/1993','address3','/ContactManager/static/img/luke.gif'),
-(4,'Chewbacca',' - ',' - ','+234923874567','01/01/1994','address4','/ContactManager/static/img/chewbacca.gif');
+INSERT INTO `person` VALUES (1,'Darth','Vader',' - ','+250966666666','01/01/1991','address1','/ContactManager/static/img/darth.gif'),(2,'Princess','Leia',' - ','+789589745934','01/01/1992','address2','/ContactManager/static/img/leia.gif'),(3,'Luke','Skywalker',' - ','+093495757223','01/01/1993','address3','/ContactManager/static/img/luke.gif'),(4,'Chewbacca',' - ',' - ','+234923874567','01/01/1994','address4','/ContactManager/static/img/chewbacca.gif');
 /*!40000 ALTER TABLE `person` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `phones`
+-- Table structure for table `phone`
 --
 
 DROP TABLE IF EXISTS `phone`;
@@ -63,16 +59,17 @@ CREATE TABLE `phone` (
   `number` varchar(255) DEFAULT NULL,
   `person_id` bigint(20) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=112 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `phones`
+-- Dumping data for table `phone`
 --
 
 LOCK TABLES `phone` WRITE;
-/*!40000 ALTER TABLE `phones` DISABLE KEYS */;
-/*!40000 ALTER TABLE `phones` ENABLE KEYS */;
+/*!40000 ALTER TABLE `phone` DISABLE KEYS */;
+INSERT INTO `phone` VALUES (104,'+250966666666',1),(105,'+250961661616',1),(106,'+789589745934',2),(107,'+789523333333',2),(108,'+093495757223',3),(109,'+093423543456',3),(110,'+234923874567',4),(111,'+234923872345',4);
+/*!40000 ALTER TABLE `phone` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -84,4 +81,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-11-28 11:58:53
+-- Dump completed on 2016-12-05 11:03:44
