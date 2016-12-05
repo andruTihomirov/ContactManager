@@ -14,17 +14,17 @@
 					 password-parameter="password"
 					 authentication-failure-url="/Access_Denied" />
 		<csrf/>
+		<remember-me
+				remember-me-parameter="remember-me"
+				remember-me-cookie="remember-me"
+				token-validity-seconds="86400"
+				data-source-ref="dataSource" />
 	</http>
 
-	<authentication-manager >
+	<authentication-manager>
 		<authentication-provider user-service-ref="customUserDetailsService"/>
 	</authentication-manager>
 
-	<remember-me
-			remember-me-parameter="remember-me"
-			remember-me-cookie="remember-me"
-			token-validity-seconds="86400"
-			data-source-ref="dataSource" />
 
 	<beans:bean id="customUserDetailsService" class="com.itechart.contactmanager.spring.services.CustomUserDetailsService" />
 
