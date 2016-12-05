@@ -1,37 +1,22 @@
-<%@taglib prefix="sec"
-	uri="http://www.springframework.org/security/tags"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@page session="true"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+
 <html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<title>Admin page</title>
+</head>
 <body>
-	<h1>Title : ${title}</h1>
-	<h1>Message : ${message}</h1>
-
-	<c:url value="/j_spring_security_logout" var="logoutUrl" />
-	<form action="${logoutUrl}" method="post" id="logoutForm">
-		<input type="hidden" name="${_csrf.parameterName}"
-			value="${_csrf.token}" />
-	</form>
-	<script>
-		function formSubmit() {
-			document.getElementById("logoutForm").submit();
-		}
-	</script>
-
-	<c:if test="${pageContext.request.userPrincipal.name != null}">
-		<h2>
-			Welcome : ${pageContext.request.userPrincipal.name} | <a
-				href="javascript:formSubmit()"> Logout</a>
-		</h2>
-	</c:if>
-
-	<sec:authorize access="isRememberMe()">
-		<h2># This user is login by "Remember Me Cookies".</h2>
-	</sec:authorize>
-
+	Dear <strong>${user}</strong>, Welcome to Admin Page.
+	
 	<sec:authorize access="isFullyAuthenticated()">
-		<h2># This user is login by username / password.</h2>
+		<label><a href="#">Create New User</a> | <a href="#">View existing Users</a></label>
 	</sec:authorize>
-
+	<sec:authorize access="isRememberMe()">
+		<label><a href="#">View existing Users</a></label>
+	</sec:authorize>
+ 
+	<a href="<c:url value="/logout" />">Logout</a>
 </body>
 </html>
