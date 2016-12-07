@@ -15,11 +15,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class HelloWorldController {
 
 	
-	@RequestMapping(value = { "/", "/home" }, method = RequestMethod.GET)
-	public String homePage(ModelMap model) {
-		model.addAttribute("greeting", "Hi, Welcome to mysite");
-		return "welcome";
-	}
+//	@RequestMapping(value = { "/", "/home" }, method = RequestMethod.GET)
+//	public String homePage(ModelMap model) {
+//		model.addAttribute("greeting", "Hi, Welcome to mysite");
+//		return "welcome";
+//	}
 
 	@RequestMapping(value = "/admin", method = RequestMethod.GET)
 	public String adminPage(ModelMap model) {

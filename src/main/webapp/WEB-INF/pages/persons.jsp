@@ -17,6 +17,11 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap-theme.min.css">
 
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/style.css">
+
+    <meta name="_csrf" content="${_csrf.token}"/>
+    <!-- default header name is X-CSRF-TOKEN -->
+    <meta name="_csrf_header" content="${_csrf.headerName}"/>
+
 </head>
 
 
@@ -33,6 +38,11 @@
     const {OverlayTrigger} = ReactBootstrap;
 
     class Person extends Component {
+        deletePerson(id) {
+            console.log("http://localhost:8080/ContactManager/delete/" + id);
+            // fetch("http://localhost:8080/ContactManager/delete/" + id);
+        };
+
         render() {
             return (
                     <li className="contact">
@@ -51,6 +61,7 @@
                                 <EditPerson person={this.props.el}/>
                             </div>
                             <div>
+                                <Button bsStyle="danger" onClick={() => this.deletePerson(this.props.reactKey)}>Delete</Button>
                                 <a href={"http://localhost:8080/ContactManager/delete/" + this.props.reactKey}>delete</a>
                             </div>
                         </div>
@@ -104,6 +115,9 @@
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
+                    'credentials': 'same-origin',
+                    'Cookie': document.cookie,
+                    '${_csrf.headerName}': '${_csrf.token}',
                 },
                 body: JSON.stringify(person)
             });
@@ -124,10 +138,12 @@
         saveAction(person) {
             console.log("create");
             fetch('http://localhost:8080/ContactManager/create', {
+                credentials: 'same-origin',
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
+                    '${_csrf.headerName}': '${_csrf.token}',
                 },
                 body: JSON.stringify(person)
             });

@@ -2,18 +2,21 @@
 			 xmlns:beans="http://www.springframework.org/schema/beans"
 			 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 			 xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
-    http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.0.xsd">
+    http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.2.xsd">
 
 	<http auto-config="true" >
 		<intercept-url pattern="/" access="permitAll" />
-		<intercept-url pattern="/home" access="permitAll" />
+		<intercept-url pattern="/persons" access="permitAll" />
+		<intercept-url pattern="/create" access="permitAll" />
+		<intercept-url pattern="/update" access="permitAll" />
+		<intercept-url pattern="/delete**" access="permitAll" />
 		<intercept-url pattern="/admin**" access="hasRole('ADMIN')" />
 		<intercept-url pattern="/dba**" access="hasRole('ADMIN') and hasRole('DBA')" />
 		<form-login  login-page="/login"
 					 username-parameter="ssoId"
 					 password-parameter="password"
 					 authentication-failure-url="/Access_Denied" />
-		<csrf/>
+		<csrf />
 		<remember-me
 				remember-me-parameter="remember-me"
 				remember-me-cookie="remember-me"
@@ -24,7 +27,6 @@
 	<authentication-manager>
 		<authentication-provider user-service-ref="customUserDetailsService"/>
 	</authentication-manager>
-
 
 	<beans:bean id="customUserDetailsService" class="com.itechart.contactmanager.spring.services.CustomUserDetailsService" />
 
