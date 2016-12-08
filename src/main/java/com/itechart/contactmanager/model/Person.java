@@ -48,7 +48,7 @@ public class Person {
     @Column(name = "address")
     private String address;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "person", orphanRemoval=true)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "person", orphanRemoval = true)
     @Cascade({CascadeType.ALL})
     @JsonInclude(Include.NON_EMPTY)
     private List<Phone> phones;

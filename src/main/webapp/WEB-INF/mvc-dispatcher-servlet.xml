@@ -44,6 +44,8 @@
 			<list>
 				<value>com.itechart.contactmanager.model.Person</value>
 				<value>com.itechart.contactmanager.model.Phone</value>
+				<value>com.itechart.contactmanager.model.User</value>
+				<value>com.itechart.contactmanager.model.UserProfile</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">
@@ -62,6 +64,14 @@
 
 	<bean id="personService" class="com.itechart.contactmanager.spring.services.impl.PersonServiceImpl">
 		<property name="personDAO" ref="personDAO"></property>
+	</bean>
+
+	<bean id="userDao" class="com.itechart.contactmanager.hibernate.dao.impl.UserDaoImpl">
+		<property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+	</bean>
+
+	<bean id="userService" class="com.itechart.contactmanager.spring.services.impl.UserServiceImpl">
+		<property name="userDao" ref="userDao"></property>
 	</bean>
 
 	<bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
