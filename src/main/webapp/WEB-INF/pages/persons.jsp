@@ -29,7 +29,14 @@
 
 
 <body>
-
+<div>
+    <a href="http://localhost:8080/ContactManager/logout">Logout</a>
+</div>
+<sec:authorize access="hasRole('ADMIN')">
+    <div>
+        <a href="http://localhost:8080/ContactManager/admin">Admin Page</a>
+    </div>
+</sec:authorize>
 <div id="content"></div>
 
 <script type="text/babel">
@@ -48,8 +55,14 @@
                  method: 'GET',
                  headers: {
                      'Accept': 'application/json',
-                     'Content-Type': 'application/json',
+                     'Content-Type': 'text/plain',
                      '${_csrf.headerName}': '${_csrf.token}',
+                 }
+             }).then(response => {
+                 if(response.status == "200") {
+                     location.reload();
+                 } else {
+                     alert("The record was not deleted. Something wrong!");
                  }
              });
         };
@@ -125,25 +138,10 @@
     }
 
     const EditPerson = React.createClass({
-
-        updateAction(person) {
-            console.log("update");
-            fetch('http://localhost:8080/ContactManager/update', {
-                credentials: 'same-origin',
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                    '${_csrf.headerName}': '${_csrf.token}',
-                },
-                body: JSON.stringify(person)
-            });
-        },
-
         render() {
             return (
                     <div>
-                        <ModalWindow name={"Update"} person={this.props.person} saveAction={this.updateAction} />
+                        <ModalWindow name={"Update"} person={this.props.person} actionName={"update"} />
                     </div>
             );
         }
@@ -151,25 +149,10 @@
 
 
     const CreatePerson = React.createClass({
-
-        saveAction(person) {
-            console.log("create");
-            fetch('http://localhost:8080/ContactManager/create', {
-                credentials: 'same-origin',
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                    '${_csrf.headerName}': '${_csrf.token}',
-                },
-                body: JSON.stringify(person)
-            });
-        },
-
         render() {
             return (
                     <div>
-                        <ModalWindow name={"Crete"} saveAction={this.saveAction} />
+                        <ModalWindow name={"Crete"} actionName={"create"} />
                     </div>
             );
         }
@@ -257,6 +240,27 @@
 
             newPerson[fieldName] = event.target.value;
             this.setState({person: newPerson});
+        };
+
+        saveAction(actionName) {
+            console.log("Action Name: " + actionName);
+            fetch("http://localhost:8080/ContactManager/" + actionName, {
+                credentials: "same-origin",
+                method: "POST",
+                headers: {
+                    "Accept": "application/json",
+                    "Content-Type": "application/json",
+                    "${_csrf.headerName}": "${_csrf.token}",
+                },
+                body: JSON.stringify(this.state.person)
+            }).then(response => {
+                if(response.status == "200") {
+                    this.close();
+                    location.reload();
+                } else {
+                    alert("The record was not added. Something wrong!");
+                }
+            });
         }
 
         close() {
@@ -338,7 +342,7 @@
                                 </div>
                             </Modal.Body>
                             <Modal.Footer>
-                                <Button onClick={() => this.props.saveAction(this.state.person)}>Save</Button>
+                                <Button onClick={() => this.saveAction(this.props.actionName)}>Save</Button>
                                 <Button onClick={this.close}>Close</Button>
                             </Modal.Footer>
                         </Modal>
