@@ -13,7 +13,7 @@ import java.util.List;
  * Created by andrei.tsikhamirau on 11/22/2016.
  */
 @Controller
-public class GetContactsController {
+public class PersonController {
 
     private PersonService personService;
 
@@ -23,7 +23,9 @@ public class GetContactsController {
     }
 
     @RequestMapping(value = "/persons", method = RequestMethod.GET)
-    public @ResponseBody List<Person> getPersons() {
+    public
+    @ResponseBody
+    List<Person> getPersons() {
         List<Person> persons = personService.getAllPersons();
         return persons;
     }
@@ -41,9 +43,8 @@ public class GetContactsController {
     }
 
 
-    @RequestMapping("/delete/{id}")
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     public String deletePerson(@PathVariable("id") Long id) {
-        System.out.println("DELETE: called.");
         personService.deletePerson(id);
         return "persons";
     }

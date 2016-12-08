@@ -14,25 +14,25 @@ import org.springframework.stereotype.Repository;
 @Repository("userDao")
 public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao {
 
-	private static final Logger logger = LoggerFactory.getLogger(PersonDAOImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(PersonDAOImpl.class);
 
-	private SessionFactory sessionFactory;
+    private SessionFactory sessionFactory;
 
-	public void setSessionFactory(SessionFactory sessionFactory) {
-		this.sessionFactory = sessionFactory;
-	}
+    public void setSessionFactory(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
 
-	public User findById(int id) {
-		return getByKey(id);
-	}
+    public User findById(int id) {
+        return getByKey(id);
+    }
 
-	public User findBySSO(String sso) {
-		Session session = this.sessionFactory.getCurrentSession();
-		Criteria criteria = session.createCriteria(User.class);
-		criteria.add(Restrictions.eq("ssoId", sso));
-		User user = (User) criteria.uniqueResult();
-		return user;
-	}
+    public User findBySSO(String sso) {
+        Session session = this.sessionFactory.getCurrentSession();
+        Criteria criteria = session.createCriteria(User.class);
+        criteria.add(Restrictions.eq("ssoId", sso));
+        User user = (User) criteria.uniqueResult();
+        return user;
+    }
 
-	
+
 }

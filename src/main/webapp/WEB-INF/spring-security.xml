@@ -5,13 +5,12 @@
     http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.2.xsd">
 
 	<http auto-config="true" >
-		<intercept-url pattern="/" access="permitAll" />
-		<intercept-url pattern="/persons" access="permitAll" />
-		<intercept-url pattern="/create" access="permitAll" />
-		<intercept-url pattern="/update" access="permitAll" />
-		<intercept-url pattern="/delete**" access="permitAll" />
-		<intercept-url pattern="/admin**" access="hasRole('ADMIN')" />
-		<intercept-url pattern="/dba**" access="hasRole('ADMIN') and hasRole('DBA')" />
+		<intercept-url pattern="/" access="hasRole('USER') or hasRole('ADMIN')" />
+		<intercept-url pattern="/persons" access="hasRole('USER') or hasRole('ADMIN')" />
+		<intercept-url pattern="/create" access="hasRole('ADMIN')" />
+		<intercept-url pattern="/update" access="hasRole('ADMIN')" />
+		<intercept-url pattern="/delete**" access="hasRole('ADMIN')" />
+		<intercept-url pattern="/admin" access="hasRole('ADMIN')" />
 		<form-login  login-page="/login"
 					 username-parameter="ssoId"
 					 password-parameter="password"

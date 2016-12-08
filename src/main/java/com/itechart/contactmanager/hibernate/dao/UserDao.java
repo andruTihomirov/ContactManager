@@ -4,9 +4,9 @@ import com.itechart.contactmanager.model.User;
 
 public interface UserDao {
 
-	User findById(int id);
-	
-	User findBySSO(String sso);
-	
+    User findById(int id);
+
+    User findBySSO(String sso);
+
 }
 

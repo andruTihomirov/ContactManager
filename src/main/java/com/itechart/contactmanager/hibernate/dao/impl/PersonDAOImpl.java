@@ -16,7 +16,6 @@ import java.util.List;
  * Created by andrei.tsikhamirau on 11/24/2016.
  */
 @Repository
-@Transactional
 public class PersonDAOImpl implements PersonDAO {
 
     private static final Logger logger = LoggerFactory.getLogger(PersonDAOImpl.class);

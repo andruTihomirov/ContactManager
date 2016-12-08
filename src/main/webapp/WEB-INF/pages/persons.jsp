@@ -1,5 +1,8 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 
 <html>
 
@@ -39,8 +42,16 @@
 
     class Person extends Component {
         deletePerson(id) {
-            console.log("http://localhost:8080/ContactManager/delete/" + id);
-            // fetch("http://localhost:8080/ContactManager/delete/" + id);
+            console.log("Delete: " + id);
+             fetch("http://localhost:8080/ContactManager/delete/" + id, {
+                 credentials: 'same-origin',
+                 method: 'GET',
+                 headers: {
+                     'Accept': 'application/json',
+                     'Content-Type': 'application/json',
+                     '${_csrf.headerName}': '${_csrf.token}',
+                 }
+             });
         };
 
         render() {
@@ -60,10 +71,11 @@
                             <div>
                                 <EditPerson person={this.props.el}/>
                             </div>
-                            <div>
-                                <Button bsStyle="danger" onClick={() => this.deletePerson(this.props.reactKey)}>Delete</Button>
-                                <a href={"http://localhost:8080/ContactManager/delete/" + this.props.reactKey}>delete</a>
-                            </div>
+                            <sec:authorize access="hasRole('ADMIN')">
+                                <div>
+                                    <Button bsStyle="danger" onClick={() => this.deletePerson(this.props.reactKey)}>Delete</Button>
+                                </div>
+                            </sec:authorize>
                         </div>
                     </li>
             );
@@ -80,11 +92,17 @@
         };
 
         componentDidMount() {
-            fetch("http://localhost:8080/ContactManager/persons")
-                    .then(response => {
+            fetch("http://localhost:8080/ContactManager/persons", {
+                credentials: 'same-origin',
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    '${_csrf.headerName}': '${_csrf.token}',
+                },
+            }).then(response => {
                         return response.json();
-                    })
-                    .then(json => {
+                    }).then(json => {
                         this.setState({contacts: json});
                     });
         };
@@ -111,12 +129,11 @@
         updateAction(person) {
             console.log("update");
             fetch('http://localhost:8080/ContactManager/update', {
+                credentials: 'same-origin',
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
-                    'credentials': 'same-origin',
-                    'Cookie': document.cookie,
                     '${_csrf.headerName}': '${_csrf.token}',
                 },
                 body: JSON.stringify(person)
@@ -253,9 +270,11 @@
         render() {
             return (
                     <div>
-                        <Button bsStyle="primary" bsSize="large" onClick={this.open}>
-                            {this.props.name}
-                        </Button>
+                        <sec:authorize access="hasRole('ADMIN')">
+                            <Button bsStyle="primary" bsSize="large" onClick={this.open}>
+                                {this.props.name}
+                            </Button>
+                        </sec:authorize>
                         <Modal show={this.state.showModal} onHide={this.close}>
                             <Modal.Header closeButton>
                                 <Modal.Title>{this.props.name}</Modal.Title>

@@ -34,7 +34,7 @@ CREATE TABLE `app_user` (
   `state` varchar(30) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `sso_id` (`sso_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -43,7 +43,7 @@ CREATE TABLE `app_user` (
 
 LOCK TABLES `app_user` WRITE;
 /*!40000 ALTER TABLE `app_user` DISABLE KEYS */;
-INSERT INTO `app_user` VALUES (1,'andru','1234567','Andru','Tihomirov','andru@andru.com','Active');
+INSERT INTO `app_user` VALUES (1,'user','user','Vasia','Pupkin','user@user.com','Active'),(2,'admin','admin','Andru','Tihomirov','admin@admin.com','Active');
 /*!40000 ALTER TABLE `app_user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -70,7 +70,7 @@ CREATE TABLE `app_user_user_profile` (
 
 LOCK TABLES `app_user_user_profile` WRITE;
 /*!40000 ALTER TABLE `app_user_user_profile` DISABLE KEYS */;
-INSERT INTO `app_user_user_profile` VALUES (1,2);
+INSERT INTO `app_user_user_profile` VALUES (1,1),(2,2);
 /*!40000 ALTER TABLE `app_user_user_profile` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -96,6 +96,7 @@ CREATE TABLE `persistent_logins` (
 
 LOCK TABLES `persistent_logins` WRITE;
 /*!40000 ALTER TABLE `persistent_logins` DISABLE KEYS */;
+INSERT INTO `persistent_logins` VALUES ('andru','ANzVSFl2Bxr6brT+u4Rd4Q==','iLU6lfFKtFs4Co5AKPDUpQ==','2016-12-08 09:39:41'),('admin','eBwGf6ZVZYffe2ZRvyXPag==','KIGOfrWO7RWgO2QqBM2aEg==','2016-12-08 10:18:59'),('andru','g5kNCSZkIkkhzEDgyKh4cw==','7F0xHOkpJXxTD8QvIs6L8Q==','2016-12-08 07:58:27'),('andru','GzRyCZazrt4gibO2Q886Ig==','gnJg+Cts6OgbXPEyOYeWQA==','2016-12-08 10:14:54'),('andru','JhIW2YSTX38UW367gP1xPQ==','Z4mEida07UfdjzZvIP+suQ==','2016-12-08 09:20:29'),('andru','oGGs5MyWF/WrsjbeWlTDKg==','TF+2+Ak97J2nE55MhUP8RA==','2016-12-08 09:01:12'),('andru','oYa/e6qVvxf9CE07Vxz0KQ==','dwitNQ10z9rGB6OOHHaSbA==','2016-12-08 08:33:09'),('andru','p1UHGdbiR1OZcp7kguMNjA==','3wGF7FTFGv/r2dB0eE1ZjQ==','2016-12-08 10:06:02'),('andru','P6cQOu9vYyTFMDdNZPZG0Q==','IcSNr+eHXuhvJUeagEilxg==','2016-12-08 09:33:40'),('admin','PRFzk6464k4STu3os8Z8mg==','FCTsCbOOTxxJbJMfCs/Ldw==','2016-12-08 10:40:26'),('admin','Q+Lm3p5fMEcclowq+dCddQ==','5t8/ryTDpaZyr50CO8De/g==','2016-12-08 10:15:22'),('andru','QNrLCQGz8oy9t8IibkwZwQ==','YqMc7f2nka/zp+s5IcWS9g==','2016-12-08 09:57:19'),('andru','rdxYcdLP3nqU1UWDEF4I4A==','yTUqOEezhQCQztZQ/lLCPg==','2016-12-08 10:09:34'),('user','s2umwS+vcXivUqqTKKsiew==','7KcK7QRrhdVTxxtekeqdxA==','2016-12-08 10:15:53'),('andru','TEROeufiOkmVyLr922qaOw==','UbsbaVncdjhS6F53oB3y7A==','2016-12-08 07:47:10'),('andru','usHRmpB8SJQIunplV85gZg==','TqgowUbHjb99nN9k65fzmQ==','2016-12-08 08:47:55'),('andru','Wdvl6CH1tQ1Z3+sut+jcNw==','LquM2MBeL7yOO+ExXkW0eA==','2016-12-08 09:38:06');
 /*!40000 ALTER TABLE `persistent_logins` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -116,7 +117,7 @@ CREATE TABLE `person` (
   `address` varchar(45) DEFAULT NULL,
   `imagePath` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=75 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=83 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -125,7 +126,7 @@ CREATE TABLE `person` (
 
 LOCK TABLES `person` WRITE;
 /*!40000 ALTER TABLE `person` DISABLE KEYS */;
-INSERT INTO `person` VALUES (1,'Darth','Vader',' - ','+250966666666','01/01/1991','address1','/ContactManager/static/img/darth.gif'),(2,'Princess','Leia',' - ','+789589745934','01/01/1992','address2','/ContactManager/static/img/leia.gif'),(3,'Luke','Skywalker',' - ','+093495757223','01/01/1993','address3','/ContactManager/static/img/luke.gif'),(4,'Chewbacca',' - ',' - ','+234923874567','01/01/1994','address4','/ContactManager/static/img/chewbacca.gif');
+INSERT INTO `person` VALUES (2,'Princess','Leia',' - ',NULL,'01/01/1992','address2','/ContactManager/static/img/leia.gif'),(3,'Luke','Skywalker',' - ','+093495757223','01/01/1993','address3','/ContactManager/static/img/luke.gif'),(4,'Chewbacca',' - ',' - ','+234923874567','01/01/1994','address4','/ContactManager/static/img/chewbacca.gif'),(82,'Darth','Vader',' - ',NULL,'01/01/1991','address1','/ContactManager/static/img/darth.gif');
 /*!40000 ALTER TABLE `person` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -141,7 +142,7 @@ CREATE TABLE `phone` (
   `number` varchar(255) DEFAULT NULL,
   `person_id` bigint(20) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=113 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=122 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -150,7 +151,7 @@ CREATE TABLE `phone` (
 
 LOCK TABLES `phone` WRITE;
 /*!40000 ALTER TABLE `phone` DISABLE KEYS */;
-INSERT INTO `phone` VALUES (104,'+250966666666',1),(105,'+250961661616',1),(106,'+789589745934',2),(107,'+789523333333',2),(108,'+093495757223',3),(109,'+093423543456',3),(110,'+234923874567',4),(111,'+234923872345',4);
+INSERT INTO `phone` VALUES (106,'+789589745935',2),(107,'+789523333333',2),(108,'+093495757223',3),(109,'+093423543456',3),(110,'+234923874567',4),(111,'+234923872345',4),(120,'+250966666666',82),(121,'+250966611111',82);
 /*!40000 ALTER TABLE `phone` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -175,7 +176,7 @@ CREATE TABLE `user_profile` (
 
 LOCK TABLES `user_profile` WRITE;
 /*!40000 ALTER TABLE `user_profile` DISABLE KEYS */;
-INSERT INTO `user_profile` VALUES (2,'ADMIN'),(3,'DBA'),(1,'USER');
+INSERT INTO `user_profile` VALUES (2,'ADMIN'),(1,'USER');
 /*!40000 ALTER TABLE `user_profile` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -188,4 +189,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-12-05 17:48:25
+-- Dump completed on 2016-12-08 14:38:04
