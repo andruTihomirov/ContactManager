@@ -27,6 +27,6 @@
 		<authentication-provider user-service-ref="customUserDetailsService"/>
 	</authentication-manager>
 
-	<beans:bean id="customUserDetailsService" class="com.itechart.contactmanager.spring.services.CustomUserDetailsService" />
+	<beans:bean id="customUserDetailsService" class="com.itechart.contactmanager.spring.services.impl.UserDetailsServiceImpl" />
 
 </beans:beans>
