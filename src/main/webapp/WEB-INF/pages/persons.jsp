@@ -74,7 +74,7 @@
                         <div className="contact-info">
                             <div className="contact-name"> {this.props.el.name} {this.props.el.surname} </div>
                             <div>
-                                {this.props.el.phones.map(
+                                {typeof(this.props.el.phones) != 'undefined' && this.props.el.phones.map(
                                         function(phone) {
                                             return <div key={phone.id} className="contact-number">{phone.number}</div>;
                                         }
@@ -192,12 +192,14 @@
                 newPerson.address = this.props.person.address;
                 newPerson.imagePath = this.props.person.imagePath;
 
-                this.props.person.phones.map((phone, i) =>
-                        newPerson.phones.push({
-                            id: phone.id,
-                            number: phone.number
-                        })
-                );
+                if(typeof(this.props.person.phones) != "undefined") {
+                    this.props.person.phones.map((phone, i) =>
+                            newPerson.phones.push({
+                                id: phone.id,
+                                number: phone.number
+                            })
+                    );
+                }
 
                 this.setState({person: newPerson});
             }
