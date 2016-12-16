@@ -27,7 +27,6 @@
 
 </head>
 
-
 <body>
 <div>
     <a href="http://localhost:8080/ContactManager/logout">Logout</a>
@@ -37,7 +36,11 @@
         <a href="http://localhost:8080/ContactManager/admin">Admin Page</a>
     </div>
 </sec:authorize>
+
+<div id="datapicker"></div>
 <div id="content"></div>
+<script src="${pageContext.request.contextPath}/static/js/bundle.js"></script>
+
 
 <script type="text/babel">
 
