@@ -1,122 +1,10 @@
-const {Component} = React;
-const {render} = ReactDOM;
-const {Modal} = ReactBootstrap;
-const {Button} = ReactBootstrap;
-const {OverlayTrigger} = ReactBootstrap;
+import React from 'react';
+import Button from 'react-bootstrap/lib/Button';
+import Modal from 'react-bootstrap/lib/Modal';
 
-class Person extends Component {
-    deletePerson(id) {
-        console.log("Delete: " + id);
-        fetch("http://localhost:8080/ContactManager/delete/" + id, {
-            credentials: 'same-origin',
-            method: 'GET',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'text/plain',
-                '${_csrf.headerName}': '${_csrf.token}',
-            }
-        }).then(response => {
-            if(response.status == "200") {
-                location.reload();
-            } else {
-                alert("The record was not deleted. Something wrong!");
-            }
-        });
-    };
+import Phone from './phone.jsx';
 
-    render() {
-        return (
-            <li className="contact">
-                <img className="contact-image" src={this.props.el.imagePath} width="60px" height="60px"/>
-                <div className="contact-info">
-                    <div className="contact-name"> {this.props.el.name} {this.props.el.surname} </div>
-                    <div>
-                        {typeof(this.props.el.phones) != 'undefined' && this.props.el.phones.map(
-                            function(phone) {
-                                return <div key={phone.id} className="contact-number">{phone.number}</div>;
-                            }
-                        )}
-                    </div>
-                    <div>address: {this.props.el.address}</div>
-                    <div>
-                        <EditPerson person={this.props.el}/>
-                    </div>
-                    <sec:authorize access="hasRole('ADMIN')">
-                        <div>
-                            <Button bsStyle="danger" onClick={() => this.deletePerson(this.props.reactKey)}>Delete</Button>
-                        </div>
-                    </sec:authorize>
-                </div>
-            </li>
-        );
-    };
-}
-
-class ContactsList extends Component {
-
-    constructor() {
-        super();
-        this.state = {
-            contacts: []
-        };
-    };
-
-    componentDidMount() {
-        fetch("http://localhost:8080/ContactManager/persons", {
-            credentials: 'same-origin',
-            method: 'GET',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                '${_csrf.headerName}': '${_csrf.token}',
-            },
-        }).then(response => {
-            return response.json();
-        }).then(json => {
-            this.setState({contacts: json});
-        });
-    };
-
-    render() {
-        return (
-            <div className="contacts">
-                <h1>Person Manager</h1>
-                <CreatePerson />
-                <ul className="contacts-list">
-                    {
-                        this.state.contacts.map(function (el) {
-                            return <Person key={el.id} reactKey={el.id} el={el}/>;
-                        })
-                    }
-                </ul>
-            </div>
-        );
-    };
-}
-
-const EditPerson = React.createClass({
-    render() {
-        return (
-            <div>
-                <ModalWindow name={"Update"} person={this.props.person} actionName={"update"} />
-            </div>
-        );
-    }
-});
-
-
-const CreatePerson = React.createClass({
-    render() {
-        return (
-            <div>
-                <ModalWindow name={"Crete"} actionName={"create"} />
-            </div>
-        );
-    }
-});
-
-
-class ModalWindow extends Component {
+export default class ManagePerson extends React.Component {
 
     constructor() {
         super();
@@ -139,7 +27,7 @@ class ModalWindow extends Component {
     };
 
     componentDidMount() {
-        if(typeof(this.props.person) != "undefined") {
+        if (typeof(this.props.person) != "undefined") {
             var newPerson = this.state.person;
             newPerson.id = this.props.person.id;
             newPerson.name = this.props.person.name;
@@ -149,7 +37,7 @@ class ModalWindow extends Component {
             newPerson.address = this.props.person.address;
             newPerson.imagePath = this.props.person.imagePath;
 
-            if(typeof(this.props.person.phones) != "undefined") {
+            if (typeof(this.props.person.phones) != "undefined") {
                 this.props.person.phones.map((phone, i) =>
                     newPerson.phones.push({
                         id: phone.id,
@@ -213,7 +101,7 @@ class ModalWindow extends Component {
             },
             body: JSON.stringify(this.state.person)
         }).then(response => {
-            if(response.status == "200") {
+            if (response.status == "200") {
                 this.close();
                 location.reload();
             } else {
@@ -233,11 +121,9 @@ class ModalWindow extends Component {
     render() {
         return (
             <div>
-                <sec:authorize access="hasRole('ADMIN')">
-                    <Button bsStyle="primary" bsSize="large" onClick={this.open}>
-                        {this.props.name}
-                    </Button>
-                </sec:authorize>
+                <Button bsStyle="primary" bsSize="large" onClick={this.open}>
+                    {this.props.name}
+                </Button>
                 <Modal show={this.state.showModal} onHide={this.close}>
                     <Modal.Header closeButton>
                         <Modal.Title>{this.props.name}</Modal.Title>
@@ -249,42 +135,42 @@ class ModalWindow extends Component {
                                 <td>Name</td>
                                 <td><input id="name" name="name" type="text"
                                            onChange={this.handleChange.bind(this, "name")}
-                                           defaultValue={typeof(this.props.person) != "undefined" ? this.props.person.name : ""} />
+                                           defaultValue={typeof(this.props.person) != "undefined" ? this.props.person.name : ""}/>
                                 </td>
                             </tr>
                             <tr>
                                 <td>Surname</td>
                                 <td><input id="surname" name="surname" type="text"
                                            onChange={this.handleChange.bind(this, "surname")}
-                                           defaultValue={typeof(this.props.person) != "undefined" ? this.props.person.surname : ""} />
+                                           defaultValue={typeof(this.props.person) != "undefined" ? this.props.person.surname : ""}/>
                                 </td>
                             </tr>
                             <tr>
                                 <td>Patronymic</td>
                                 <td><input id="patronymic" name="patronymic" type="text"
                                            onChange={this.handleChange.bind(this, "patronymic")}
-                                           defaultValue={typeof(this.props.person) != "undefined" ? this.props.person.patronymic : ""} />
+                                           defaultValue={typeof(this.props.person) != "undefined" ? this.props.person.patronymic : ""}/>
                                 </td>
                             </tr>
                             <tr>
                                 <td>Date Of Birth</td>
                                 <td><input id="dob" name="dob" type="text"
                                            onChange={this.handleChange.bind(this, "dob")}
-                                           defaultValue={typeof(this.props.person) != "undefined" ? this.props.person.dob : ""} />
+                                           defaultValue={typeof(this.props.person) != "undefined" ? this.props.person.dob : ""}/>
                                 </td>
                             </tr>
                             <tr>
                                 <td>Address</td>
                                 <td><input id="address" name="address" type="text"
                                            onChange={this.handleChange.bind(this, "address")}
-                                           defaultValue={typeof(this.props.person) != "undefined" ? this.props.person.address : ""} />
+                                           defaultValue={typeof(this.props.person) != "undefined" ? this.props.person.address : ""}/>
                                 </td>
                             </tr>
                             <tr>
                                 <td>Image Path</td>
                                 <td><input id="imagePath" name="imagePath" type="text"
                                            onChange={this.handleChange.bind(this, "imagePath")}
-                                           defaultValue={typeof(this.props.person) != "undefined" ? this.props.person.imagePath : ""} />
+                                           defaultValue={typeof(this.props.person) != "undefined" ? this.props.person.imagePath : ""}/>
                                 </td>
                             </tr>
                             </tbody>
@@ -295,7 +181,7 @@ class ModalWindow extends Component {
                                        reactKey={i}
                                        phone={phone}
                                        onChangeMethod={this.handleChange.bind(this)}
-                                       deleteItem={this.deleteItem.bind(this)} />
+                                       deleteItem={this.deleteItem.bind(this)}/>
                             )}
                             <button onClick={this.addItem.bind(this)}>Add Phone</button>
                         </div>
@@ -309,23 +195,3 @@ class ModalWindow extends Component {
         );
     }
 };
-
-class Phone extends Component {
-    render() {
-        return (
-            <li>
-                <input id={typeof(this.props.phone) != "undefined" ? this.props.phone.id : ""}
-                       type="text"
-                       name={"phone_" + this.props.reactKey}
-                       onChange={this.props.onChangeMethod.bind(this, "phone_" + this.props.reactKey)}
-                       defaultValue={typeof(this.props.phone) != "undefined" ? this.props.phone.number : ""} />
-                <button onClick={this.props.deleteItem.bind(this, this.props.reactKey)}> - </button>
-            </li>
-        );
-    };
-}
-
-render(
-    <ContactsList />,
-    document.getElementById("content")
-);
