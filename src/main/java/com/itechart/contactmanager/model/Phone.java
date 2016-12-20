@@ -17,11 +17,6 @@ public class Phone {
     @Column(name = "number")
     private String number;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "person_id", nullable = false)
-    @JsonIgnore
-    private Person person;
-
     public Long getId() {
         return id;
     }
@@ -38,11 +33,4 @@ public class Phone {
         this.number = number;
     }
 
-    public Person getPerson() {
-        return person;
-    }
-
-    public void setPerson(Person person) {
-        this.person = person;
-    }
 }

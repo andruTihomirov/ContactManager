@@ -8,6 +8,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import org.hibernate.annotations.Cascade;
@@ -48,8 +49,9 @@ public class Person {
     @Column(name = "address")
     private String address;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "person", orphanRemoval = true)
+    @OneToMany(fetch = FetchType.EAGER, orphanRemoval = true)
     @Cascade({CascadeType.ALL})
+    @JoinColumn(name="person_id", nullable = true)
     @JsonInclude(Include.NON_EMPTY)
     private List<Phone> phones;
 
