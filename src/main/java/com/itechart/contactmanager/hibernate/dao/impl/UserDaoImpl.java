@@ -1,6 +1,5 @@
 package com.itechart.contactmanager.hibernate.dao.impl;
 
-import com.itechart.contactmanager.hibernate.dao.AbstractDao;
 import com.itechart.contactmanager.hibernate.dao.UserDao;
 import com.itechart.contactmanager.model.User;
 import org.hibernate.Criteria;
@@ -12,7 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 @Repository("userDao")
-public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao {
+public class UserDaoImpl implements UserDao {
 
     private static final Logger logger = LoggerFactory.getLogger(PersonDAOImpl.class);
 
@@ -23,7 +22,8 @@ public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao {
     }
 
     public User findById(int id) {
-        return getByKey(id);
+        Session session = this.sessionFactory.getCurrentSession();
+        return (User) session.get(User.class, id);
     }
 
     public User findBySSO(String sso) {
@@ -33,6 +33,5 @@ public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao {
         User user = (User) criteria.uniqueResult();
         return user;
     }
-
 
 }
