@@ -21,16 +21,19 @@ public class UserDaoImpl implements UserDao {
         this.sessionFactory = sessionFactory;
     }
 
-    public User findById(int id) {
+    public User get(int id) {
         Session session = this.sessionFactory.getCurrentSession();
-        return (User) session.get(User.class, id);
+        User user = (User) session.get(User.class, id);
+        logger.info("Method get() called. Found user:\n" + user);
+        return user;
     }
 
-    public User findBySSO(String sso) {
+    public User getBySSO(String sso) {
         Session session = this.sessionFactory.getCurrentSession();
         Criteria criteria = session.createCriteria(User.class);
         criteria.add(Restrictions.eq("ssoId", sso));
         User user = (User) criteria.uniqueResult();
+        logger.info("Method getBySSO() called. Found user:\n" + user);
         return user;
     }
 

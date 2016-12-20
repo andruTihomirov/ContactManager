@@ -14,13 +14,13 @@ public class UserServiceImpl implements UserService {
     private UserDao userDao;
 
     @Transactional
-    public User findById(int id) {
-        return userDao.findById(id);
+    public User getById(int id) {
+        return userDao.get(id);
     }
 
     @Transactional
-    public User findBySso(String sso) {
-        return userDao.findBySSO(sso);
+    public User getBySso(String sso) {
+        return userDao.getBySSO(sso);
     }
 
     public void setUserDao(UserDao userDao) {
