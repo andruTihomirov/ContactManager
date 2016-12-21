@@ -15,11 +15,13 @@ import java.util.List;
 @Controller
 public class PersonController {
 
+    public static final String VIEW_PERSONS = "persons";
+
     private PersonService personService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String getMainPage() {
-        return "persons";
+        return VIEW_PERSONS;
     }
 
     @RequestMapping(value = "/persons", method = RequestMethod.GET)
