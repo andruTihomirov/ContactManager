@@ -1,25 +1,26 @@
 package com.itechart.contactmanager.spring.controllers;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.itechart.contactmanager.model.Person;
-import com.itechart.contactmanager.spring.controllers.PersonController;
+import com.itechart.contactmanager.preparators.TestPreparator;
 import com.itechart.contactmanager.spring.services.PersonService;
-import java.util.ArrayList;
 import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.mockito.runners.MockitoJUnitRunner;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.servlet.ViewResolver;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
+import org.springframework.web.servlet.view.JstlView;
 
 
-import static org.mockito.Matchers.isA;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
@@ -33,30 +34,51 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 /**
  * Created by andrei.tsikhamirau on 12/21/2016.
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:root-context.xml", "classpath:mvc-dispatcher-servlet.xml",
-        "classpath:spring-security.xml"})
+@RunWith(MockitoJUnitRunner.class)
+@ContextConfiguration(locations = {"classpath:mvc-dispatcher-servlet.xml"})
 @WebAppConfiguration
 public class PersonControllerTest {
 
-    public static final String PERSONS_JSP = "/WEB-INF/pages/persons.jsp";
+    private static final String VIEW_RESOLVER_PREFIX = "/WEB-INF/pages/";
+    private static final String VIEW_RESOLVER_SUFFIX = ".jsp";
+
+    public static final String PERSONS_JSP = VIEW_RESOLVER_PREFIX + "persons" + VIEW_RESOLVER_SUFFIX;
+
     public static final String MAIN_URL = "/";
     public static final String PERSONS_URL = "/persons";
+    public static final String CREATE_URL = "/create";
+    public static final String UPDATE_URL = "/update";
+    public static final String DELETE_URL = "/delete/{id}";
+
+    public static final long ID = 1L;
+    public static final int PERSON_COUNT = 4;
 
     public Person person;
 
     private MockMvc mockMvc;
 
-    @Autowired
-    private WebApplicationContext webApplicationContext;
-
+    @Mock
     private PersonService personService;
 
     @Before
     public void setUp() {
-        mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
-        personService = Mockito.mock(PersonService.class);
-        Mockito.reset(personService);
+
+        PersonController personController = new PersonController();
+        personController.setPersonService(personService);
+
+        mockMvc = MockMvcBuilders.standaloneSetup(personController)
+                .setViewResolvers(viewResolver())
+                .build();
+    }
+
+    private ViewResolver viewResolver() {
+        InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
+
+        viewResolver.setViewClass(JstlView.class);
+        viewResolver.setPrefix(VIEW_RESOLVER_PREFIX);
+        viewResolver.setSuffix(VIEW_RESOLVER_SUFFIX);
+
+        return viewResolver;
     }
 
     @Test
@@ -69,25 +91,52 @@ public class PersonControllerTest {
 
     @Test
     public void testGetPersons() throws Exception {
-        List<Person> persons = buildPersons();
-
+        List<Person> persons = TestPreparator.preparePersons(PERSON_COUNT);
         when(personService.getAllPersons()).thenReturn(persons);
 
-        mockMvc.perform(post(PERSONS_URL))
+        mockMvc.perform(get(PERSONS_URL))
                 .andExpect(status().isOk());
 
         verify(personService, times(1)).getAllPersons();
         verifyNoMoreInteractions(personService);
     }
 
-    private List<Person> buildPersons() {
-        List<Person> persons = new ArrayList<Person>();
-        Person person0 = new Person("test0", "test0", "test0", null,  "test0", "test0", "test0");
-        Person person1 = new Person("test1", "test1", "test1", null,  "test1", "test1", "test1");
-        Person person2 = new Person("test2", "test2", "test2", null,  "test2", "test2", "test2");
-        persons.add(person0);
-        persons.add(person1);
-        persons.add(person2);
-        return persons;
+    @Test
+    public void testCreatePerson() throws Exception {
+        Person person = TestPreparator.preparePerson(ID);
+
+        ObjectMapper mapper = new ObjectMapper();
+        String personJson =  mapper.writeValueAsString(person);
+
+        mockMvc.perform(post(CREATE_URL).contentType(MediaType.APPLICATION_JSON).content(personJson))
+                .andExpect(status().isOk())
+                .andExpect(view().name(PersonController.VIEW_PERSONS));
+
+        verify(personService, times(1)).addPerson(any(Person.class));
+        verifyNoMoreInteractions(personService);
+
     }
+
+    @Test
+    public void testUpdatePerson() throws Exception {
+        Person person = TestPreparator.preparePerson(ID);
+
+        ObjectMapper mapper = new ObjectMapper();
+        String personJson =  mapper.writeValueAsString(person);
+
+        mockMvc.perform(post(UPDATE_URL).contentType(MediaType.APPLICATION_JSON).content(personJson))
+                .andExpect(status().isOk())
+                .andExpect(view().name(PersonController.VIEW_PERSONS));
+
+        verify(personService, times(1)).updatePerson(any(Person.class));
+        verifyNoMoreInteractions(personService);
+    }
+
+    @Test
+    public void testDeletePerson() throws Exception {
+        mockMvc.perform(get(DELETE_URL, ID))
+                .andExpect(status().isOk())
+                .andExpect(view().name(PersonController.VIEW_PERSONS));
+    }
+
 }

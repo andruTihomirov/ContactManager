@@ -96,7 +96,7 @@ CREATE TABLE `persistent_logins` (
 
 LOCK TABLES `persistent_logins` WRITE;
 /*!40000 ALTER TABLE `persistent_logins` DISABLE KEYS */;
-INSERT INTO `persistent_logins` VALUES ('user','8t6P1K1J43WNFQteqSL6ag==','24fZVeEBYF/oFLbK3XfRYQ==','2016-12-08 11:44:35'),('andru','ANzVSFl2Bxr6brT+u4Rd4Q==','iLU6lfFKtFs4Co5AKPDUpQ==','2016-12-08 09:39:41'),('admin','b0diis1BLLWikqjyN7iB/Q==','krlE4CAarZ/m2YDO22O3vA==','2016-12-20 11:45:24'),('andru','g5kNCSZkIkkhzEDgyKh4cw==','7F0xHOkpJXxTD8QvIs6L8Q==','2016-12-08 07:58:27'),('andru','GzRyCZazrt4gibO2Q886Ig==','gnJg+Cts6OgbXPEyOYeWQA==','2016-12-08 10:14:54'),('andru','JhIW2YSTX38UW367gP1xPQ==','Z4mEida07UfdjzZvIP+suQ==','2016-12-08 09:20:29'),('user','kC0Nn8gdIrXm767JM4KJkw==','gfZ5ZU5nkbrOtXNvMAr6xw==','2016-12-08 14:31:07'),('user','MCDibijo04gddDwSR2PLEw==','iY0wgc4JteO5u/+a7yKZtg==','2016-12-08 14:26:46'),('andru','oGGs5MyWF/WrsjbeWlTDKg==','TF+2+Ak97J2nE55MhUP8RA==','2016-12-08 09:01:12'),('andru','oYa/e6qVvxf9CE07Vxz0KQ==','dwitNQ10z9rGB6OOHHaSbA==','2016-12-08 08:33:09'),('andru','p1UHGdbiR1OZcp7kguMNjA==','3wGF7FTFGv/r2dB0eE1ZjQ==','2016-12-08 10:06:02'),('andru','P6cQOu9vYyTFMDdNZPZG0Q==','IcSNr+eHXuhvJUeagEilxg==','2016-12-08 09:33:40'),('andru','QNrLCQGz8oy9t8IibkwZwQ==','YqMc7f2nka/zp+s5IcWS9g==','2016-12-08 09:57:19'),('user','QoeltzD3zic6nCzhyELHtA==','9h+dU3RbSEjvY3Y3mn2e8A==','2016-12-08 15:20:07'),('user','qWq0i1Pbb0ZtKuPBOEND0g==','5/9FiyO/9G8q0J2Fw/wKHA==','2016-12-08 14:32:53'),('andru','rdxYcdLP3nqU1UWDEF4I4A==','yTUqOEezhQCQztZQ/lLCPg==','2016-12-08 10:09:34'),('user','s2umwS+vcXivUqqTKKsiew==','7KcK7QRrhdVTxxtekeqdxA==','2016-12-08 10:15:53'),('user','sfNtQCFBZv0MhPYD5flHEQ==','f2PQ/N6F05EsC82efq8T6g==','2016-12-08 14:21:08'),('andru','TEROeufiOkmVyLr922qaOw==','UbsbaVncdjhS6F53oB3y7A==','2016-12-08 07:47:10'),('user','TgbRKdq+CPxUvfoETM0bNw==','mOenz49Si2xA77v5B885/A==','2016-12-09 08:43:44'),('andru','usHRmpB8SJQIunplV85gZg==','TqgowUbHjb99nN9k65fzmQ==','2016-12-08 08:47:55'),('user','vaIjrY5QWDecjK1gp43lMQ==','LkemgY6j8UntVpoCDgJtnA==','2016-12-08 15:20:14'),('andru','Wdvl6CH1tQ1Z3+sut+jcNw==','LquM2MBeL7yOO+ExXkW0eA==','2016-12-08 09:38:06'),('user','Xit4d8zIPS8+j6RGujo6dg==','eqtbkczvS8o9+VYz5Wg5wQ==','2016-12-13 07:38:08');
+INSERT INTO `persistent_logins` VALUES ('user','1BjEd/p8QibOrXQATYY07g==','utxp0sBL7sO2gD4gnXQ6HA==','2016-12-20 12:12:45'),('user','3VOM9AziTR0VBiUbrbtLvw==','s/10nd+GsIrOZu32ptpSdQ==','2016-12-21 09:51:29'),('admin','5Q5xzffqfg8GCJ6Cp4Ajlg==','MJIwHjDGPTCUnGA9LF+ohQ==','2016-12-21 09:51:15'),('admin','5slqJmPgd2YHz/HKvrmHTA==','ap2c2wOLvg0aRUgwGWj0BQ==','2016-12-21 07:46:27'),('admin','7czMl+pszNha9koDNAB8OQ==','gJrL70kd6UwAEPxfJgIQMw==','2016-12-22 08:46:00'),('user','8t6P1K1J43WNFQteqSL6ag==','24fZVeEBYF/oFLbK3XfRYQ==','2016-12-08 11:44:35'),('andru','ANzVSFl2Bxr6brT+u4Rd4Q==','iLU6lfFKtFs4Co5AKPDUpQ==','2016-12-08 09:39:41'),('admin','b0diis1BLLWikqjyN7iB/Q==','LJkLoQjlpyNMGujHGNiGrg==','2016-12-20 12:11:19'),('admin','fFcP736Fdxw2opul6ab8nA==','MqRiJUFDe8r8+fpHv9XZ2g==','2016-12-20 12:11:28'),('andru','g5kNCSZkIkkhzEDgyKh4cw==','7F0xHOkpJXxTD8QvIs6L8Q==','2016-12-08 07:58:27'),('andru','GzRyCZazrt4gibO2Q886Ig==','gnJg+Cts6OgbXPEyOYeWQA==','2016-12-08 10:14:54'),('admin','h7VeOo4bqwTU9eexgmLE+Q==','mTf1LFh/eorL/BRjuPtpew==','2016-12-21 10:03:19'),('andru','JhIW2YSTX38UW367gP1xPQ==','Z4mEida07UfdjzZvIP+suQ==','2016-12-08 09:20:29'),('user','kC0Nn8gdIrXm767JM4KJkw==','gfZ5ZU5nkbrOtXNvMAr6xw==','2016-12-08 14:31:07'),('admin','Lyp2r/SdE5Xu9OHa1wbqQw==','oEvJLGl03f91Rji2Y35OSQ==','2016-12-21 09:51:24'),('user','MCDibijo04gddDwSR2PLEw==','iY0wgc4JteO5u/+a7yKZtg==','2016-12-08 14:26:46'),('user','OG+cwOtXMFb/l0l98doKjg==','VrrUMA0dUfUFnpwzRZIXDw==','2016-12-21 10:03:25'),('andru','oGGs5MyWF/WrsjbeWlTDKg==','TF+2+Ak97J2nE55MhUP8RA==','2016-12-08 09:01:12'),('andru','oYa/e6qVvxf9CE07Vxz0KQ==','dwitNQ10z9rGB6OOHHaSbA==','2016-12-08 08:33:09'),('admin','P1HI4B226WFxy/9XTj5OpA==','npQ1dUEQvgOSswZoOqiE/g==','2016-12-21 10:02:50'),('andru','p1UHGdbiR1OZcp7kguMNjA==','3wGF7FTFGv/r2dB0eE1ZjQ==','2016-12-08 10:06:02'),('andru','P6cQOu9vYyTFMDdNZPZG0Q==','IcSNr+eHXuhvJUeagEilxg==','2016-12-08 09:33:40'),('andru','QNrLCQGz8oy9t8IibkwZwQ==','YqMc7f2nka/zp+s5IcWS9g==','2016-12-08 09:57:19'),('user','QoeltzD3zic6nCzhyELHtA==','9h+dU3RbSEjvY3Y3mn2e8A==','2016-12-08 15:20:07'),('user','qWq0i1Pbb0ZtKuPBOEND0g==','5/9FiyO/9G8q0J2Fw/wKHA==','2016-12-08 14:32:53'),('andru','rdxYcdLP3nqU1UWDEF4I4A==','yTUqOEezhQCQztZQ/lLCPg==','2016-12-08 10:09:34'),('admin','rOCIlcTvsUMP8KwMmY3HkQ==','XZ+WJeQZ/TZaNsMCW52Ltg==','2016-12-20 12:12:24'),('user','s2umwS+vcXivUqqTKKsiew==','7KcK7QRrhdVTxxtekeqdxA==','2016-12-08 10:15:53'),('user','sfNtQCFBZv0MhPYD5flHEQ==','f2PQ/N6F05EsC82efq8T6g==','2016-12-08 14:21:08'),('admin','tahXFNvSh0Lcr6pno1N2ZQ==','5dz89FhwqqmZFGihAQT0qw==','2016-12-20 16:00:41'),('andru','TEROeufiOkmVyLr922qaOw==','UbsbaVncdjhS6F53oB3y7A==','2016-12-08 07:47:10'),('user','TgbRKdq+CPxUvfoETM0bNw==','mOenz49Si2xA77v5B885/A==','2016-12-09 08:43:44'),('admin','U31ijjOEq6W3M3VEDbDvDQ==','WTtTpaZ9JwaGBquKYcpaLQ==','2016-12-20 15:59:23'),('andru','usHRmpB8SJQIunplV85gZg==','TqgowUbHjb99nN9k65fzmQ==','2016-12-08 08:47:55'),('user','vaIjrY5QWDecjK1gp43lMQ==','LkemgY6j8UntVpoCDgJtnA==','2016-12-08 15:20:14'),('andru','Wdvl6CH1tQ1Z3+sut+jcNw==','LquM2MBeL7yOO+ExXkW0eA==','2016-12-08 09:38:06'),('admin','wZQkDjwy7EvZ3Y/fPsQU/w==','2uIu99lSW79RsbD20s2jDQ==','2016-12-21 11:46:58'),('user','Xit4d8zIPS8+j6RGujo6dg==','eqtbkczvS8o9+VYz5Wg5wQ==','2016-12-13 07:38:08'),('user','xs7P/5f3rOLlm9T7hKXgLw==','1/sNRzccg5eeh6iMGXTLdA==','2016-12-21 07:02:55');
 /*!40000 ALTER TABLE `persistent_logins` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -112,12 +112,11 @@ CREATE TABLE `person` (
   `name` varchar(45) DEFAULT NULL,
   `surname` varchar(45) DEFAULT NULL,
   `patronymic` varchar(45) DEFAULT NULL,
-  `phoneNumbers` varchar(45) DEFAULT NULL,
   `dob` varchar(45) DEFAULT NULL,
   `address` varchar(45) DEFAULT NULL,
   `imagePath` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=87 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=97 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -126,7 +125,7 @@ CREATE TABLE `person` (
 
 LOCK TABLES `person` WRITE;
 /*!40000 ALTER TABLE `person` DISABLE KEYS */;
-INSERT INTO `person` VALUES (2,'Princess','Leia',' - ',NULL,'01/01/1992','address2','/ContactManager/static/img/leia.gif'),(3,'Luke','Skywalker',' - ','+093495757223','01/01/1993','address3','/ContactManager/static/img/luke.gif'),(4,'Chewbacca',' - ',' - ','+234923874567','01/01/1994','address4','/ContactManager/static/img/chewbacca.gif'),(82,'Darth','Vader',' - ',NULL,'01/01/1991','address1','/ContactManager/static/img/darth.gif');
+INSERT INTO `person` VALUES (2,'Princess','Leia',' - ','01/01/1992','address2','/ContactManager/static/img/leia.gif'),(3,'Luke','Skywalker',' - ','01/01/1993','address3','/ContactManager/static/img/luke.gif'),(4,'Chewbacca',' - ',' - ','01/01/1994','address4','/ContactManager/static/img/chewbacca.gif'),(82,'Darth','Vader',' - ','01/01/1991','address1','/ContactManager/static/img/darth.gif');
 /*!40000 ALTER TABLE `person` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -166,7 +165,7 @@ CREATE TABLE `phone` (
   `number` varchar(255) DEFAULT NULL,
   `person_id` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=125 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=142 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -213,4 +212,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-12-20 14:49:25
+-- Dump completed on 2016-12-22 11:49:24

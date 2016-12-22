@@ -25,9 +25,7 @@ public class PersonController {
     }
 
     @RequestMapping(value = "/persons", method = RequestMethod.GET)
-    public
-    @ResponseBody
-    List<Person> getPersons() {
+    public @ResponseBody List<Person> getPersons() {
         List<Person> persons = personService.getAllPersons();
         return persons;
     }
@@ -43,7 +41,6 @@ public class PersonController {
         personService.updatePerson(person);
         return "persons";
     }
-
 
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     public String deletePerson(@PathVariable("id") Long id) {

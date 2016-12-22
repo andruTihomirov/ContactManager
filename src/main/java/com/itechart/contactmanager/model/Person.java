@@ -40,9 +40,6 @@ public class Person {
     @Column(name = "patronymic")
     private String patronymic;
 
-    @Column(name = "phoneNumbers")
-    private String phoneNumbers;
-
     @Column(name = "dob")
     private String dob;
 
@@ -58,12 +55,11 @@ public class Person {
     public Person() {
     }
 
-    public Person(String name, String surname, String patronymic, String phoneNumbers, String dob,
+    public Person(String name, String surname, String patronymic, String dob,
                   String address, String imagePath) {
         this.name = name;
         this.surname = surname;
         this.patronymic = patronymic;
-        this.phoneNumbers = phoneNumbers;
         this.dob = dob;
         this.address = address;
         this.imagePath = imagePath;
@@ -107,14 +103,6 @@ public class Person {
 
     public void setPatronymic(String patronymic) {
         this.patronymic = patronymic;
-    }
-
-    public String getPhoneNumbers() {
-        return phoneNumbers;
-    }
-
-    public void setPhoneNumbers(String phoneNumbers) {
-        this.phoneNumbers = phoneNumbers;
     }
 
     public String getDob() {
