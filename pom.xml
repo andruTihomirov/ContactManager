@@ -183,7 +183,7 @@
     </dependencies>
 
     <build>
-        <finalName>TomcatLocalServer</finalName>
+        <finalName>ContactManager</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.tomcat.maven</groupId>
