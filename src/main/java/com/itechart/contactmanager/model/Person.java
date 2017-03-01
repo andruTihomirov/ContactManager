@@ -141,13 +141,13 @@ public class Person {
 
     @Override
     public String toString() {
-        String topLevelData = "ID: [" + id + "]\nName: [" + name + "]\nSurname: [" + surname + "]\nPatronymic: [" + patronymic +
-                "]\nDOB: [" + dob + "]\nAddress: [" + address + "]";
+        String topLevelData = "Person ID: [" + id + "] Name: [" + name + "] Surname: [" + surname + "] Patronymic: [" + patronymic +
+                "] DOB: [" + dob + "] Address: [" + address + "]";
 
-        String innerData = "\nPnones";
+        String innerData = " Phones";
         if (phones != null) {
             for (Phone phone : phones) {
-                innerData += "\nphone: " + phone.getNumber();
+                innerData += " " + phone.getNumber();
             }
         }
 

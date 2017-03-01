@@ -183,7 +183,7 @@
     </dependencies>
 
     <build>
-        <finalName>ContactManager</finalName>
+        <finalName>TomcatLocalServer</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.tomcat.maven</groupId>
@@ -193,6 +193,9 @@
                     <path>/ContactManager</path>
                     <update>true</update>
                     <url>http://localhost:8080/manager/text</url>
+                    <!--TODO: do not work contextReloadable-->
+                    <!--<contextReloadable>true</contextReloadable>-->
+                    <server>TomcatLocalServer</server>
                     <username>admin</username>
                     <password>admin</password>
                 </configuration>
